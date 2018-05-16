@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Input;
 using Diploma.Infrastructure;
+using Diploma.View;
 
 namespace Diploma.ViewModel
 {
@@ -16,11 +17,13 @@ namespace Diploma.ViewModel
 		{
 			try
 			{
-				MessageBox.Show("Test");
+				MessageBoxWindow messageBoxWindow = new MessageBoxWindow("Test");
+				messageBoxWindow.ShowDialog();
 			}
 			catch (Exception e)
 			{
-				MessageBox.Show(e.Message);
+				MessageBoxWindow messageBoxWindow = new MessageBoxWindow(e.Message);
+				messageBoxWindow.ShowDialog();
 			}
 		}
 		public bool CanExecuteCommand(object parameter) => true;
