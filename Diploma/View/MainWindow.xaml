@@ -3,11 +3,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:local="clr-namespace:Diploma"
+        xmlns:viewModel="clr-namespace:Diploma.ViewModel"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
         Background="#333" ResizeMode="CanResizeWithGrip" WindowState="Maximized" FontFamily="Times New Roman">
-    <Grid>
+    <Window.Resources>
+        <viewModel:MainWindowViewModel x:Key="ViewModel"></viewModel:MainWindowViewModel>
+    </Window.Resources>
+    <Grid DataContext="{StaticResource ViewModel}">
         <StackPanel >
             <Menu Margin="10">
                 <MenuItem Header="Фаил">
@@ -36,6 +41,7 @@
                             <ComboBoxItem Content="Гранат" />
                             <ComboBoxItem Content="Банан" />
                         </ComboBox>
+                        <Button Content="Подсчитать" Height="33"  Command="{Binding Test}"></Button>
                     </StackPanel>
                 </TabItem>
                 <TabItem Header="Дополнительный материал">
@@ -46,3 +52,4 @@
         </StackPanel>
     </Grid>
 </Window>
+
