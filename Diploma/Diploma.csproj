@@ -63,6 +63,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Data\BrandConcrete.cs" />
+    <Compile Include="Data\CementBrand.cs" />
+    <Compile Include="Data\CoarseAggregate.cs" />
+    <Compile Include="Data\ConcreteFormula.cs" />
+    <Compile Include="Data\FineAggregate.cs" />
+    <Compile Include="Data\MixtureMobility.cs" />
     <Compile Include="View\MessageBoxWindow.xaml.cs">
       <DependentUpon>MessageBoxWindow.xaml</DependentUpon>
     </Compile>
@@ -126,8 +132,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

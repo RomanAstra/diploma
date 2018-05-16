@@ -34,9 +34,14 @@
                 <TabItem Header="Калькулятор бетонной смеси">
                     <WrapPanel Margin="0,0,217,0">
                         <Label Content="Необходимое количество бетона" Foreground="White"></Label>
-                        <TextBox Text="{Binding TestStr, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                        <TextBox Text="{Binding ConcreteFormula, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                         <Label Content="Марка прочности:" Foreground="White"></Label>
-                        <ComboBox Margin="12" Height="28" Width="180"/>
+                        <ComboBox ItemsSource="{Binding ConcreteFormula.BrandConcreteList}"
+                                  Text="{Binding ConcreteFormula.BrandConcreteList, UpdateSourceTrigger=PropertyChanged}"
+                                  DisplayMemberPath="Strength"
+                                  SelectedValuePath="Strength" 
+                                  SelectedItem="{Binding Path=BrandConcrete}"
+                                  Margin="12" Height="28" Width="180"/>
                         <Label Content="Крупный заполнитель:" Foreground="White"></Label>
                         <ComboBox Margin="12" Height="28" Width="180"/>
                         <Label Content="Мелкий заполнитель:" Foreground="White"></Label>
