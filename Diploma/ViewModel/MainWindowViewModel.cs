@@ -8,6 +8,17 @@ namespace Diploma.ViewModel
 {
 	public class MainWindowViewModel : ViewModelBase
 	{
+		private string _test;
+		public string TestStr
+		{
+			get => _test;
+			set
+			{
+				_test = value;
+				OnPropertyChanged(nameof(TestStr));
+			}
+		}
+
 		private RelayCommand _testCommand;
 		public ICommand Test => _testCommand ?? (_testCommand =
 			                                new RelayCommand(ExecuteCommand,
@@ -26,7 +37,7 @@ namespace Diploma.ViewModel
 				messageBoxWindow.ShowDialog();
 			}
 		}
-		public bool CanExecuteCommand(object parameter) => true;
+		public bool CanExecuteCommand(object parameter) => !String.IsNullOrEmpty(TestStr);
 
 		protected override void OnDispose()
 		{

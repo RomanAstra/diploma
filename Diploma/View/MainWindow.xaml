@@ -32,7 +32,21 @@
         <StackPanel Margin="10,32,-10,0" >
             <TabControl Margin="0,10,10,10" Height="361">
                 <TabItem Header="Калькулятор бетонной смеси">
-                    <StackPanel Margin="0,0,557,0">
+                    <WrapPanel Margin="0,0,217,0">
+                        <Label Content="Необходимое количество бетона" Foreground="White"></Label>
+                        <TextBox Text="{Binding TestStr, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                        <Label Content="Марка прочности:" Foreground="White"></Label>
+                        <ComboBox Margin="12" Height="28" Width="180"/>
+                        <Label Content="Крупный заполнитель:" Foreground="White"></Label>
+                        <ComboBox Margin="12" Height="28" Width="180"/>
+                        <Label Content="Мелкий заполнитель:" Foreground="White"></Label>
+                        <ComboBox Margin="12" Height="28" Width="180"/>
+                        <Label Content="Марка цемента:" Foreground="White"></Label>
+                        <ComboBox Margin="12" Height="28" Width="180"/>
+                        <Label Content="Подвижность смеси:" Foreground="White"></Label>
+                        <ComboBox Margin="12" Height="28" Width="180"/>
+                        <Label Content="Пластификатор:" Foreground="White"></Label>
+                        <ComboBox Margin="12" Height="28" Width="180"/>
                         <ComboBox Margin="12" Height="28" Width="180">
                             <ComboBoxItem Content="Normal" IsSelected="True"/>
                             <ComboBoxItem Content="Яблоко" />
@@ -42,7 +56,7 @@
                             <ComboBoxItem Content="Банан" />
                         </ComboBox>
                         <Button Content="Подсчитать" Height="33"  Command="{Binding Test}"></Button>
-                    </StackPanel>
+                    </WrapPanel>
                 </TabItem>
                 <TabItem Header="Дополнительный материал">
                     <StackPanel>
