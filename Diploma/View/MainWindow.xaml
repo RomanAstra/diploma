@@ -21,7 +21,7 @@
                             <Path Width="16" Height="16" Stretch="Fill" Fill="{StaticResource FillPath}" Data="{StaticResource new_windowStyle0}" />
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Command="Open" Header="Открыть"/>
+                    <MenuItem Command="{Binding OpenAccount}" Header="Открыть"/>
                     <Separator/>
                     <MenuItem Header="Сохранить"/>
                 </MenuItem>
@@ -52,15 +52,7 @@
                         <ComboBox Margin="12" Height="28" Width="180"/>
                         <Label Content="Пластификатор:" Foreground="White"></Label>
                         <ComboBox Margin="12" Height="28" Width="180"/>
-                        <ComboBox Margin="12" Height="28" Width="180">
-                            <ComboBoxItem Content="Normal" IsSelected="True"/>
-                            <ComboBoxItem Content="Яблоко" />
-                            <ComboBoxItem Content="Арбуз" />
-                            <ComboBoxItem Content="Апельсин" />
-                            <ComboBoxItem Content="Гранат" />
-                            <ComboBoxItem Content="Банан" />
-                        </ComboBox>
-                        <Button Content="Подсчитать" Height="33"  Command="{Binding Test}"></Button>
+                        <Button Content="Подсчитать" Command="{Binding Calculate}" Height="33"></Button>
                     </WrapPanel>
                 </TabItem>
                 <TabItem Header="Дополнительный материал">

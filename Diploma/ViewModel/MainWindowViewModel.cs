@@ -9,12 +9,6 @@ namespace Diploma.ViewModel
 {
 	public class MainWindowViewModel : ViewModelBase
 	{
-		public MainWindowViewModel()
-		{
-			//_concreteFormula = new ConcreteFormula();
-			CurrentBrandConcrete = _concreteFormula?.BrandConcreteList[0];
-		}
-
 		private ConcreteFormula _concreteFormula;
 		public ConcreteFormula ConcreteFormula
 		{
@@ -32,7 +26,7 @@ namespace Diploma.ViewModel
 		private BrandConcrete _currentCurrentBrandConcrete;
 		public BrandConcrete CurrentBrandConcrete
 		{
-			get => _currentCurrentBrandConcrete;
+			get => _currentCurrentBrandConcrete ?? ConcreteFormula?.BrandConcreteList[0];
 			set
 			{
 				_currentCurrentBrandConcrete = value;
@@ -45,30 +39,55 @@ namespace Diploma.ViewModel
 
 		#region Commands
 
-		private RelayCommand _testCommand;
+		private RelayCommand _calculateCommand;
 
-		public ICommand Test => _testCommand ?? (_testCommand =
-			                        new RelayCommand(ExecuteCommand,
-				                        CanExecuteCommand));
+		public ICommand Calculate => _calculateCommand ?? (_calculateCommand =
+			                        new RelayCommand(ExecuteCalculateCommand,
+										CanExecuteCalculateCommand));
 
-		public void ExecuteCommand(object parameter)
+		public void ExecuteCalculateCommand(object parameter)
 		{
 			try
 			{
 				MessageBoxWindow messageBoxWindow = new MessageBoxWindow(CurrentBrandConcrete.Strength);
 				messageBoxWindow.ShowDialog();
+				//ConcreteFormulaRepositoty.SaveData();
 			}
 			catch (Exception e)
 			{
 				MessageBoxWindow messageBoxWindow = new MessageBoxWindow(e.Message);
 				messageBoxWindow.ShowDialog();
 			}
-			ConcreteFormulaRepositoty.SaveData();
 		}
-		public bool CanExecuteCommand(object parameter)
+
+		public bool CanExecuteCalculateCommand(object parameter)
 		{
-			return CurrentBrandConcrete != null;
+			return true;
 		}
+
+
+		#region Команда окрытия списка со сохранеными расчетами
+
+		private RelayCommand _openAccountCommand;
+
+		public ICommand OpenAccount => _openAccountCommand ?? (_openAccountCommand =
+			                        new RelayCommand(ExecuteOpenAccountCommand));
+
+		public void ExecuteOpenAccountCommand(object parameter)
+		{
+			try
+			{
+				OpenAccountsWindow openAccountsWindow = new OpenAccountsWindow();
+				openAccountsWindow.ShowDialog();
+			}
+			catch (Exception e)
+			{
+				MessageBoxWindow messageBoxWindow = new MessageBoxWindow(e.Message);
+				messageBoxWindow.ShowDialog();
+			}
+		}
+
+		#endregion
 
 		#endregion
 
