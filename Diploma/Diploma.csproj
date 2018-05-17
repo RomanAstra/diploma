@@ -63,10 +63,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DataSave\DataXML.cs" />
+    <Compile Include="DataSave\IData.cs" />
     <Compile Include="Data\BrandConcrete.cs" />
     <Compile Include="Data\CementBrand.cs" />
     <Compile Include="Data\CoarseAggregate.cs" />
     <Compile Include="Data\ConcreteFormula.cs" />
+    <Compile Include="Data\ConcreteFormulaRepositoty.cs" />
     <Compile Include="Data\FineAggregate.cs" />
     <Compile Include="Data\MixtureMobility.cs" />
     <Compile Include="View\MessageBoxWindow.xaml.cs">

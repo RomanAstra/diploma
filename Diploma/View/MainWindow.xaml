@@ -40,7 +40,7 @@
                                   Text="{Binding ConcreteFormula.BrandConcreteList, UpdateSourceTrigger=PropertyChanged}"
                                   DisplayMemberPath="Strength"
                                   SelectedValuePath="Strength" 
-                                  SelectedItem="{Binding Path=BrandConcrete}"
+                                  SelectedItem="{Binding Path=CurrentBrandConcrete}"
                                   Margin="12" Height="28" Width="180"/>
                         <Label Content="Крупный заполнитель:" Foreground="White"></Label>
                         <ComboBox Margin="12" Height="28" Width="180"/>

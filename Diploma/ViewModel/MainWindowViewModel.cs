@@ -11,14 +11,14 @@ namespace Diploma.ViewModel
 	{
 		public MainWindowViewModel()
 		{
-			_concreteFormula = new ConcreteFormula();
-			BrandConcrete = _concreteFormula.BrandConcreteList[0];
+			//_concreteFormula = new ConcreteFormula();
+			CurrentBrandConcrete = _concreteFormula?.BrandConcreteList[0];
 		}
 
 		private ConcreteFormula _concreteFormula;
 		public ConcreteFormula ConcreteFormula
 		{
-			get => _concreteFormula;
+			get => _concreteFormula ?? (_concreteFormula = ConcreteFormulaRepositoty.ConcreteFormula);
 			set
 			{
 				_concreteFormula = value;
@@ -26,29 +26,36 @@ namespace Diploma.ViewModel
 			}
 		}
 
-		private BrandConcrete _brandConcrete;
-		public BrandConcrete BrandConcrete
+
+		#region Выбранные параметры
+
+		private BrandConcrete _currentCurrentBrandConcrete;
+		public BrandConcrete CurrentBrandConcrete
 		{
-			get => _brandConcrete;
+			get => _currentCurrentBrandConcrete;
 			set
 			{
-				_brandConcrete = value;
-				OnPropertyChanged(nameof(BrandConcrete));
+				_currentCurrentBrandConcrete = value;
+				OnPropertyChanged(nameof(CurrentBrandConcrete));
 			}
 		}
 
+		#endregion
+
+
+		#region Commands
 
 		private RelayCommand _testCommand;
 
 		public ICommand Test => _testCommand ?? (_testCommand =
-			                                new RelayCommand(ExecuteCommand,
-				                                CanExecuteCommand));
+			                        new RelayCommand(ExecuteCommand,
+				                        CanExecuteCommand));
 
 		public void ExecuteCommand(object parameter)
 		{
 			try
 			{
-				MessageBoxWindow messageBoxWindow = new MessageBoxWindow(BrandConcrete.Strength);
+				MessageBoxWindow messageBoxWindow = new MessageBoxWindow(CurrentBrandConcrete.Strength);
 				messageBoxWindow.ShowDialog();
 			}
 			catch (Exception e)
@@ -56,11 +63,14 @@ namespace Diploma.ViewModel
 				MessageBoxWindow messageBoxWindow = new MessageBoxWindow(e.Message);
 				messageBoxWindow.ShowDialog();
 			}
+			ConcreteFormulaRepositoty.SaveData();
 		}
 		public bool CanExecuteCommand(object parameter)
 		{
-			return BrandConcrete != null;
+			return CurrentBrandConcrete != null;
 		}
+
+		#endregion
 
 		protected override void OnDispose()
 		{
