@@ -1,7 +1,12 @@
-﻿namespace Diploma.Data
+﻿using System;
+
+namespace Diploma.Data
 {
-	public class FineAggregate
+    [Serializable]
+    public class FineAggregate
 	{
-		public string FillerType;
-	}
+		private string _fillerType;
+
+        public string FillerType { get => _fillerType; set => _fillerType = value; }
+    }
 }

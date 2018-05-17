@@ -5,6 +5,8 @@ namespace Diploma.Data
 	[Serializable]
 	public class CoarseAggregate
 	{
-		public string FillerType;
-	}
+		private string _fillerType;
+
+        public string FillerType { get => _fillerType; set => _fillerType = value; }
+    }
 }

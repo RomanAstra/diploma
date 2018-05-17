@@ -9,7 +9,13 @@ namespace Diploma.ViewModel
 {
 	public class MainWindowViewModel : ViewModelBase
 	{
-		private ConcreteFormula _concreteFormula;
+        public MainWindowViewModel()
+        {
+            //TODO временно вернул, для теста
+            _concreteFormula = new ConcreteFormula();
+        }
+
+        private ConcreteFormula _concreteFormula;
 		public ConcreteFormula ConcreteFormula
 		{
 			get => _concreteFormula ?? (_concreteFormula = ConcreteFormulaRepositoty.ConcreteFormula);
@@ -34,12 +40,67 @@ namespace Diploma.ViewModel
 			}
 		}
 
-		#endregion
+        private CoarseAggregate _currentCoarseAggregate;
+        public CoarseAggregate CurrentCoarseAggregate
+        {
+            get => _currentCoarseAggregate ?? ConcreteFormula?.CoarseAggregateList[0];
+            set
+            {
+                _currentCoarseAggregate = value;
+                OnPropertyChanged(nameof(CurrentCoarseAggregate));
+            }
+        }
+
+        private FineAggregate _currentFineAggregate;
+        public FineAggregate CurrentFineAggregate
+        {
+            get => _currentFineAggregate ?? ConcreteFormula?.FineAggregateList[0];
+            set
+            {
+                _currentFineAggregate = value;
+                OnPropertyChanged(nameof(CurrentFineAggregate));
+            }
+        }
+
+        private CementBrand _currentCementBrand;
+        public CementBrand CurrentCementBrand
+        {
+            get => _currentCementBrand ?? ConcreteFormula?.CementBrandList[0];
+            set
+            {
+                _currentCementBrand = value;
+                OnPropertyChanged(nameof(CurrentCementBrand));
+            }
+        }
+
+        private MixtureMobility _currentMixtureMobility;
+        public MixtureMobility CurrentMixtureMobility
+        {
+            get => _currentMixtureMobility ?? ConcreteFormula?.MixtureMobilityList[0];
+            set
+            {
+                _currentMixtureMobility = value;
+                OnPropertyChanged(nameof(CurrentMixtureMobility));
+            }
+        }
+
+        private Admixtures _currentAdmixtures;
+        public Admixtures CurrentAdmixtures
+        {
+            get => _currentAdmixtures ?? ConcreteFormula?.AdmixturesList[0];
+            set
+            {
+                _currentAdmixtures = value;
+                OnPropertyChanged(nameof(CurrentAdmixtures));
+            }
+        }
+
+        #endregion
 
 
-		#region Commands
+        #region Commands
 
-		private RelayCommand _calculateCommand;
+        private RelayCommand _calculateCommand;
 
 		public ICommand Calculate => _calculateCommand ?? (_calculateCommand =
 			                        new RelayCommand(ExecuteCalculateCommand,

@@ -5,7 +5,9 @@ namespace Diploma.Data
 	[Serializable]
 	public class CementBrand
 	{
-		public string Brand;
+		private string _brand;
 		public string Description;
-	}
+
+        public string Brand { get => _brand; set => _brand = value; }
+    }
 }
