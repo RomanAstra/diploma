@@ -48,9 +48,9 @@ namespace Diploma.Data
 
             AdmixturesList = new List<Admixtures>
             {
-                new Admixtures {Admixture = "хуй"},
-                new Admixtures {Admixture = "пизда"},
-                new Admixtures {Admixture = "джигурда"},
+                new Admixtures { Admixture="хуй" },
+                new Admixtures { Admixture="пизда" },
+                new Admixtures { Admixture="джигурда" },
             };
         }
 

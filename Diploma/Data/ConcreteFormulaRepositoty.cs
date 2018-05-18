@@ -23,7 +23,6 @@ namespace Diploma.Data
 
 		public static void SaveData()
 		{
-			Console.WriteLine(1);
 			_data?.Save(ConcreteFormula);
 		}
 	}

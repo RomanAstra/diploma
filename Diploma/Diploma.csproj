@@ -74,6 +74,7 @@
     <Compile Include="Data\ConcreteFormulaRepositoty.cs" />
     <Compile Include="Data\FineAggregate.cs" />
     <Compile Include="Data\MixtureMobility.cs" />
+    <Compile Include="Data\Calculation.cs" />
     <Compile Include="View\MessageBoxWindow.xaml.cs">
       <DependentUpon>MessageBoxWindow.xaml</DependentUpon>
     </Compile>

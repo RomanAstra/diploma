@@ -11,9 +11,16 @@ namespace Diploma.ViewModel
 	{
         public MainWindowViewModel()
         {
-            //TODO временно вернул, для теста
-            _concreteFormula = new ConcreteFormula();
-        }
+	        Calculation = new Calculation
+	        {
+		        Admixtures = ConcreteFormula?.AdmixturesList[0],
+		        BrandConcrete = ConcreteFormula?.BrandConcreteList[0],
+		        CementBrand = ConcreteFormula?.CementBrandList[0],
+		        CoarseAggregate = ConcreteFormula?.CoarseAggregateList[0],
+		        FineAggregate = ConcreteFormula?.FineAggregateList[0],
+		        MixtureMobility = ConcreteFormula?.MixtureMobilityList[0]
+	        };
+		}
 
         private ConcreteFormula _concreteFormula;
 		public ConcreteFormula ConcreteFormula
@@ -29,71 +36,16 @@ namespace Diploma.ViewModel
 
 		#region Выбранные параметры
 
-		private BrandConcrete _currentCurrentBrandConcrete;
-		public BrandConcrete CurrentBrandConcrete
+		private Calculation _calculation;
+		public Calculation Calculation
 		{
-			get => _currentCurrentBrandConcrete ?? ConcreteFormula?.BrandConcreteList[0];
+			get => _calculation;
 			set
 			{
-				_currentCurrentBrandConcrete = value;
-				OnPropertyChanged(nameof(CurrentBrandConcrete));
+				_calculation = value;
+				OnPropertyChanged(nameof(Calculation));
 			}
 		}
-
-        private CoarseAggregate _currentCoarseAggregate;
-        public CoarseAggregate CurrentCoarseAggregate
-        {
-            get => _currentCoarseAggregate ?? ConcreteFormula?.CoarseAggregateList[0];
-            set
-            {
-                _currentCoarseAggregate = value;
-                OnPropertyChanged(nameof(CurrentCoarseAggregate));
-            }
-        }
-
-        private FineAggregate _currentFineAggregate;
-        public FineAggregate CurrentFineAggregate
-        {
-            get => _currentFineAggregate ?? ConcreteFormula?.FineAggregateList[0];
-            set
-            {
-                _currentFineAggregate = value;
-                OnPropertyChanged(nameof(CurrentFineAggregate));
-            }
-        }
-
-        private CementBrand _currentCementBrand;
-        public CementBrand CurrentCementBrand
-        {
-            get => _currentCementBrand ?? ConcreteFormula?.CementBrandList[0];
-            set
-            {
-                _currentCementBrand = value;
-                OnPropertyChanged(nameof(CurrentCementBrand));
-            }
-        }
-
-        private MixtureMobility _currentMixtureMobility;
-        public MixtureMobility CurrentMixtureMobility
-        {
-            get => _currentMixtureMobility ?? ConcreteFormula?.MixtureMobilityList[0];
-            set
-            {
-                _currentMixtureMobility = value;
-                OnPropertyChanged(nameof(CurrentMixtureMobility));
-            }
-        }
-
-        private Admixtures _currentAdmixtures;
-        public Admixtures CurrentAdmixtures
-        {
-            get => _currentAdmixtures ?? ConcreteFormula?.AdmixturesList[0];
-            set
-            {
-                _currentAdmixtures = value;
-                OnPropertyChanged(nameof(CurrentAdmixtures));
-            }
-        }
 
         #endregion
 
@@ -110,7 +62,7 @@ namespace Diploma.ViewModel
 		{
 			try
 			{
-				MessageBoxWindow messageBoxWindow = new MessageBoxWindow(CurrentBrandConcrete.Strength);
+				MessageBoxWindow messageBoxWindow = new MessageBoxWindow(Calculation.BrandConcrete.Strength);
 				messageBoxWindow.ShowDialog();
 				//ConcreteFormulaRepositoty.SaveData();
 			}
