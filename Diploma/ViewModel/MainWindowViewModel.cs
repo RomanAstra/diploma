@@ -33,9 +33,6 @@ namespace Diploma.ViewModel
 			}
 		}
 
-
-		#region Выбранные параметры
-
 		private Calculation _calculation;
 		public Calculation Calculation
 		{
@@ -46,8 +43,6 @@ namespace Diploma.ViewModel
 				OnPropertyChanged(nameof(Calculation));
 			}
 		}
-
-        #endregion
 
 
         #region Commands
@@ -81,17 +76,41 @@ namespace Diploma.ViewModel
 
 		#region Команда окрытия списка со сохранеными расчетами
 
-		private RelayCommand _openAccountCommand;
+		private RelayCommand _openCalculateCommand;
 
-		public ICommand OpenAccount => _openAccountCommand ?? (_openAccountCommand =
-			                        new RelayCommand(ExecuteOpenAccountCommand));
+		public ICommand OpenCalculate => _openCalculateCommand ?? (_openCalculateCommand =
+			                        new RelayCommand(ExecuteOpenCalculateCommand));
 
-		public void ExecuteOpenAccountCommand(object parameter)
+		public void ExecuteOpenCalculateCommand(object parameter)
 		{
 			try
 			{
-				OpenAccountsWindow openAccountsWindow = new OpenAccountsWindow();
-				openAccountsWindow.ShowDialog();
+				OpenCalculationsWindow openCalculationsWindow = new OpenCalculationsWindow();
+				openCalculationsWindow.ShowDialog();
+			}
+			catch (Exception e)
+			{
+				MessageBoxWindow messageBoxWindow = new MessageBoxWindow(e.Message);
+				messageBoxWindow.ShowDialog();
+			}
+		}
+
+		#endregion	
+
+		#region Команда сохранения расчета
+
+		private RelayCommand _saveCalculationCommand;
+
+		public ICommand SaveCalculation => _saveCalculationCommand ?? (_saveCalculationCommand =
+			                               new RelayCommand(ExecuteSaveCalculationCommand));
+
+		public void ExecuteSaveCalculationCommand(object parameter)
+		{
+			try
+			{
+				Calculation.Name = "Test";
+				Calculation.DateTime = DateTime.Now;
+				CalculationListRepositoty.AddItem(Calculation);
 			}
 			catch (Exception e)
 			{
@@ -102,7 +121,7 @@ namespace Diploma.ViewModel
 
 		#endregion
 
-		#endregion
+#endregion
 
 		protected override void OnDispose()
 		{
