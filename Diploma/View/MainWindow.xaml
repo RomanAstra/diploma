@@ -21,9 +21,9 @@
                             <Path Width="16" Height="16" Stretch="Fill" Fill="{StaticResource FillPath}" Data="{StaticResource new_windowStyle0}" />
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Command="{Binding OpenAccount}" Header="Открыть"/>
+                    <MenuItem Command="{Binding OpenCalculate}" Header="Открыть"/>
                     <Separator/>
-                    <MenuItem Header="Сохранить"/>
+                    <MenuItem Command="{Binding SaveCalculation}" Header="Сохранить"/>
                 </MenuItem>
                 <MenuItem Header="Теоретический материал"/>
                 <MenuItem Header="О программе" IsEnabled="False"/>
