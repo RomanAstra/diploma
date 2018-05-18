@@ -52,32 +52,32 @@
                                   Text="{Binding ConcreteFormula.BrandConcreteList, UpdateSourceTrigger=PropertyChanged}"
                                   DisplayMemberPath="Strength"
                                   SelectedValuePath="Strength" 
-                                  SelectedItem="{Binding Path=CurrentBrandConcrete}"
+                                  SelectedItem="{Binding Path=Calculate.BrandConcrete}"
                                   Margin="5" Width="180"/>
                             <ComboBox ItemsSource="{Binding ConcreteFormula.CoarseAggregateList, UpdateSourceTrigger=PropertyChanged}"
                                   DisplayMemberPath="FillerType"
                                   SelectedValuePath="FillerType" 
-                                  SelectedItem="{Binding Path=CurrentCoarseAggregate}"
+                                  SelectedItem="{Binding Path=Calculate.CoarseAggregate}"
                                   Margin="5" Width="180"/>
                             <ComboBox ItemsSource="{Binding ConcreteFormula.FineAggregateList, UpdateSourceTrigger=PropertyChanged}"
                                   DisplayMemberPath="FillerType"
                                   SelectedValuePath="FillerType" 
-                                  SelectedItem="{Binding Path=CurrentFineAggregate}"
+                                  SelectedItem="{Binding Path=Calculate.FineAggregate}"
                                   Margin="5" Width="180"/>
                             <ComboBox ItemsSource="{Binding ConcreteFormula.CementBrandList, UpdateSourceTrigger=PropertyChanged}"
                                   DisplayMemberPath="Brand"
                                   SelectedValuePath="Brand" 
-                                  SelectedItem="{Binding Path=CurrentCementBrand}"
+                                  SelectedItem="{Binding Path=Calculate.CementBrand}"
                                   Margin="5" Width="180"/>
                             <ComboBox ItemsSource="{Binding ConcreteFormula.MixtureMobilityList, UpdateSourceTrigger=PropertyChanged}"
                                   DisplayMemberPath="Mobility"
                                   SelectedValuePath="Mobility" 
-                                  SelectedItem="{Binding Path=CurrentMixtureMobility}"
+                                  SelectedItem="{Binding Path=Calculate.MixtureMobility}"
                                   Margin="5" Width="180"/>
                             <ComboBox ItemsSource="{Binding ConcreteFormula.AdmixturesList, UpdateSourceTrigger=PropertyChanged}"
                                   DisplayMemberPath="Admixture"
                                   SelectedValuePath="Admixture" 
-                                  SelectedItem="{Binding Path=CurrentAdmixtures}"
+                                  SelectedItem="{Binding Path=Calculate.Admixtures}"
                                   Margin="5" Width="180"/>
                             <Button Content="Подсчитать" Command="{Binding Calculate}" Width="180"></Button>
                         </StackPanel>
