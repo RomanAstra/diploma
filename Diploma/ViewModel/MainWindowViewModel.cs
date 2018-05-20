@@ -172,10 +172,6 @@ namespace Diploma.ViewModel
             {
                 LogInWindow logInWindow = new LogInWindow();
                 logInWindow.ShowDialog();
-                if (logInWindow.DialogResult.HasValue && logInWindow.DialogResult.Value)
-                    MessageBox.Show("успешно!");
-                else
-                    MessageBox.Show("всё хуйня");
             }
             catch (Exception e)
             {
@@ -214,7 +210,19 @@ namespace Diploma.ViewModel
 			_nameCalculate = nameCalculate;
 		}
 
-		protected override void OnDispose()
+        /// <summary>
+        /// Проверка результата авторизации
+        /// </summary>
+        /// <param name="nameCalculate"></param>
+        public void SetLogInResult(bool logInResult)
+        {
+            if (logInResult)
+                MessageBox.Show("успешно!");
+            else
+                MessageBox.Show("всё хуйня");
+        }
+
+        protected override void OnDispose()
 		{
 			// Очистка ресурсов
 		}

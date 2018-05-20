@@ -76,10 +76,14 @@
     <Compile Include="Data\FineAggregate.cs" />
     <Compile Include="Data\MixtureMobility.cs" />
     <Compile Include="Data\Calculation.cs" />
+    <Compile Include="ViewModel\LogInWindowViewModel.cs" />
     <Compile Include="ViewModel\OpenCalculationsViewModel.cs" />
     <Compile Include="ViewModel\SetNameCalculateWindowViewModel.cs" />
     <Compile Include="View\HelpWindow.xaml.cs">
       <DependentUpon>HelpWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\LogInWindow.xaml.cs">
+      <DependentUpon>LogInWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MessageBoxWindow.xaml.cs">
       <DependentUpon>MessageBoxWindow.xaml</DependentUpon>
@@ -93,6 +97,10 @@
     <Page Include="View\HelpWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\LogInWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

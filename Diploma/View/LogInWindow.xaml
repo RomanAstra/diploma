@@ -19,6 +19,6 @@
         <TextBox HorizontalAlignment="Left" Height="30" Margin="47,71,0,0" TextWrapping="Wrap" Text="{ Binding Login, Mode=TwoWay, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="201" Grid.ColumnSpan="2"/>
         <TextBlock HorizontalAlignment="Left" Margin="47,175,0,0" TextWrapping="Wrap" Text="{Binding Login, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Height="22" Width="201" Grid.ColumnSpan="2"/>
         <PasswordBox Name="passwordBox"  HorizontalAlignment="Left" Margin="47,106,0,0" VerticalAlignment="Top" Height="32" Width="201" Grid.ColumnSpan="2" PasswordChar="*"/>
-        <Button Content="OK" HorizontalAlignment="Left" Height="32" Margin="108,143,0,0" VerticalAlignment="Top" Width="84" Command="{Binding LogIn}" CommandParameter="{Binding ElementName=passwordBox}" Grid.ColumnSpan="2"/>
+        <Button Click="Button_Click" Content="OK" HorizontalAlignment="Left" Height="32" Margin="108,143,0,0" VerticalAlignment="Top" Width="84" Command="{Binding LogIn}" CommandParameter="{Binding ElementName=passwordBox}" Grid.ColumnSpan="2"/>
     </Grid>
 </Window> 

@@ -56,13 +56,12 @@ namespace Diploma.ViewModel
         {
             try
             {
+                bool logInResult = false;
                 var passwordBox = parameter as PasswordBox;
                 Password = passwordBox.Password;
-                if((Login != null && Login.Equals(@"123")) && (Password != null && Password.Equals("123")))
-                {
-                    MainWindowViewModel.Instance.
-                    //this.clos
-                }
+                if ((Login != null && Login.Equals(@"123")) && (Password != null && Password.Equals("123")))
+                    logInResult = true;
+                MainWindowViewModel.Instance.SetLogInResult(logInResult);
             }
             catch (Exception e)
             {
