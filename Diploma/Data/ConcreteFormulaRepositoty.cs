@@ -15,7 +15,7 @@ namespace Diploma.Data
 			set => _concreteFormula = value;
 		}
 
-		private static readonly IData<ConcreteFormula> _data = new DataXML<ConcreteFormula>();
+		private static readonly IData<ConcreteFormula> _data = new DataXML<ConcreteFormula>("Data");
 		static ConcreteFormulaRepositoty()
 		{
 			ConcreteFormula = _data?.Load();

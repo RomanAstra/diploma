@@ -2,6 +2,7 @@
 
 namespace Diploma.Data
 {
+	[Serializable]
 	public class Calculation
 	{
 		public string Name { get; set; }

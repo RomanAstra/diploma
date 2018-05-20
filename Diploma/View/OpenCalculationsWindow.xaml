@@ -5,25 +5,34 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Diploma.View"
         xmlns:viewModel="clr-namespace:Diploma.ViewModel"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         mc:Ignorable="d"
-        Title="OpenCalculationsWindow" Height="450" Width="800"
+        Title="CloseCalculationsWindow" Name="Main" Height="450" Width="800"
         Background="#333" ResizeMode="CanResizeWithGrip">
     <Window.Resources>
         <viewModel:OpenCalculationsViewModel x:Key="ViewModel"></viewModel:OpenCalculationsViewModel>
     </Window.Resources>
     <Grid DataContext="{StaticResource ViewModel}">
         <StackPanel>
-            <ListView Margin="10" ItemsSource ="{Binding Calculation}" Height="328">
+            <ListView Name="MainListView" Margin="10" ItemsSource ="{Binding Calculation}" Height="328">
                 <ListView.View>
                     <GridView AllowsColumnReorder="True">
                         <GridViewColumn DisplayMemberBinding="{Binding Path=Name}" Header="Название" Width="120"/>
                         <GridViewColumn DisplayMemberBinding="{Binding Path=DateTime}" Header="Дата сохранения" Width="160" />
                     </GridView>
                 </ListView.View>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction
+                            Command="{Binding SelectioCommand}"
+                            CommandParameter="{Binding ElementName=MainListView, Path=SelectedItem}">
+                        </i:InvokeCommandAction>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
             </ListView>
             <WrapPanel>
-                <Button Content="Открыть" Width="120" Height="30" Margin="15"/>
-                <Button Content="Закрыть" Width="120" Height="30" Margin="15"/>
+                <Button Content="Открыть" Command="{Binding Open}" CommandParameter="{Binding ElementName=Main}" Width="120" Height="30" Margin="15"/>
+                <Button Content="Закрыть" Command="{Binding Close}" CommandParameter="{Binding ElementName=Main}" Width="120" Height="30" Margin="15"/>
             </WrapPanel>
         </StackPanel>
     </Grid>

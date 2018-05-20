@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Diploma.Data
 {
@@ -9,7 +10,7 @@ namespace Diploma.Data
 		public ConcreteFormula()
 		{
             //TODO временные данные, для теста
-            BrandConcreteList = new List<BrandConcrete>
+            BrandConcreteList = new ObservableCollection<BrandConcrete>
             {
                 new BrandConcrete {Strength = "M50"},
                 new BrandConcrete {Strength = "M75"},
@@ -54,7 +55,7 @@ namespace Diploma.Data
             };
         }
 
-		public List<BrandConcrete> BrandConcreteList { get; set; }
+		public ObservableCollection<BrandConcrete> BrandConcreteList { get; set; }
         public List<CoarseAggregate> CoarseAggregateList { get; set; }
         public List<FineAggregate> FineAggregateList { get; set; }
         public List<CementBrand> CementBrandList { get; set; }

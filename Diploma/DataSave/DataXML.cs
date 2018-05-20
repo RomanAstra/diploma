@@ -9,10 +9,10 @@ namespace Diploma.DataSave
 		private readonly string _path;
 		private readonly XmlSerializer _xmlSerializer;
 
-		public DataXML()
+		public DataXML(string fileName)
 		{
 			_xmlSerializer = new XmlSerializer(typeof(T));
-			_path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data.bat");
+			_path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, $"{fileName}.xml");
 		}
 
 		public void Save(T arg)

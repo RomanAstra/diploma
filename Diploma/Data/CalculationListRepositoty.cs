@@ -16,7 +16,7 @@ namespace Diploma.Data
 			set => _concreteFormula = value;
 		}
 
-		private static readonly IData<Calculation[]> _data = new DataXML<Calculation[]>();
+		private static readonly IData<Calculation[]> _data = new DataXML<Calculation[]>("Calculations");
 		static CalculationListRepositoty()
 		{
 			var tempList = _data?.Load();
