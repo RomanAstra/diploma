@@ -25,7 +25,7 @@
                     <Separator/>
                     <MenuItem Command="{Binding SaveCalculation}" Header="Сохранить"/>
                 </MenuItem>
-                <MenuItem Header="Теоретический материал"/>
+                <MenuItem Command="{Binding ShowTheory}" Header="Справочный материал"/>
                 <MenuItem Header="О программе" IsEnabled="False"/>
             </Menu>
         </StackPanel>

@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TreeViewItem>
+    <TreeViewItem.Header>
+        <StackPanel Orientation="Horizontal"  ToolTip="Attribute">
+            <TextBlock Text=""   VerticalAlignment="Center"  Foreground="Chocolate"/>
+            <Label Content=""   VerticalAlignment="Center" />
+        </StackPanel>
+    </TreeViewItem.Header>
+</TreeViewItem>

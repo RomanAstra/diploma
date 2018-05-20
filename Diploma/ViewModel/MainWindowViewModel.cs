@@ -57,10 +57,9 @@ namespace Diploma.ViewModel
 		{
 			try
 			{
-				MessageBoxWindow messageBoxWindow = new MessageBoxWindow(Calculation.BrandConcrete.Strength);
-				messageBoxWindow.ShowDialog();
-				//ConcreteFormulaRepositoty.SaveData();
-			}
+                MessageBoxWindow messageBoxWindow = new MessageBoxWindow(Calculation.BrandConcrete.Strength);
+                messageBoxWindow.ShowDialog();
+            }
 			catch (Exception e)
 			{
 				MessageBoxWindow messageBoxWindow = new MessageBoxWindow(e.Message);
@@ -119,11 +118,32 @@ namespace Diploma.ViewModel
 			}
 		}
 
-		#endregion
+        #endregion
+
+        #region Команда показа теории
+        private RelayCommand _showTheoryCommand;
+
+        public ICommand ShowTheory => _showTheoryCommand ?? (_showTheoryCommand =
+                                           new RelayCommand(ShowTheoryCommand));
+
+        public void ShowTheoryCommand(object parameter)
+        {
+            try
+            {
+				HelpWindow helpWindow = new HelpWindow();
+                helpWindow.Show();
+            }
+            catch (Exception e)
+            {
+                MessageBoxWindow messageBoxWindow = new MessageBoxWindow(e.Message);
+                messageBoxWindow.ShowDialog();
+            }
+        }
+        #endregion
 
 #endregion
 
-		protected override void OnDispose()
+        protected override void OnDispose()
 		{
 			// Очистка ресурсов
 		}
