@@ -170,8 +170,12 @@ namespace Diploma.ViewModel
         {
             try
             {
-                //LogInWindow logInWindow = new LogInWindow();
-               // logInWindow.Show();
+                LogInWindow logInWindow = new LogInWindow();
+                logInWindow.ShowDialog();
+                if (logInWindow.DialogResult.HasValue && logInWindow.DialogResult.Value)
+                    MessageBox.Show("успешно!");
+                else
+                    MessageBox.Show("всё хуйня");
             }
             catch (Exception e)
             {

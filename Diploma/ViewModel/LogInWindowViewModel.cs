@@ -1,51 +1,75 @@
-﻿using System;
+﻿using Diploma.Infrastructure;
+using Diploma.View;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace Diploma.ViewModel
 {
     class LogInWindowViewModel : ViewModelBase
     {
-        //public event EventHandler LoginCompleted;
+        private string login;
+        private string password;
 
-        //public void RaiseLoginCompleted()
-        //{
-        //    if (LoginCompleted != null)
-        //    {
-        //        LoginCompleted(this, EventArgs.Empty);
-        //    }
-        //}
+        public string Login
+        {
+            get { return login; }
+            set { login = value; }
+        }
 
-        //private string login;
-        //private string password;
+        public string Password
+        {
+            private get { return password; }
+            set { password = value; }
+        }
 
-        //public string Login
-        //{
-        //    get { return login; }
-        //    set { login = value; OnPropertyChanged("Login"); }
-        //}
+        private RelayCommand _passwordChanged;
 
-        //public string Password
-        //{
-        //    private get { return password; }
-        //    set { password = value; OnPropertyChanged("Password"); }
-        //}
+        public ICommand PasswordChanged => _logInCommand ?? (_passwordChanged =
+                                           new RelayCommand(PasswordChangedCommand));
 
-        //public void LoginOp(object o)
-        //{
-        //    RaiseLoginCompleted();
-        //}
+        public void PasswordChangedCommand(object parameter)
+        {
+            try
+            {
+               
+            }
+            catch (Exception e)
+            {
+                MessageBoxWindow messageBoxWindow = new MessageBoxWindow(e.Message);
+                messageBoxWindow.ShowDialog();
+            }
+        }
 
-        //public ICommand LoginCommand { get; set; }
+        public event EventHandler LoginCompleted;
 
-        //public LoginViewModel()
-        //{
-        //    LoginCommand = new DelegateCommand(LoginOp);
-        //    OnPropertyChanged("LoginOp");
-        //}
+        private RelayCommand _logInCommand;
+
+        public ICommand LogIn => _logInCommand ?? (_logInCommand =
+                                           new RelayCommand(LogInCommand));
+
+        public void LogInCommand(object parameter)
+        {
+            try
+            {
+                var passwordBox = parameter as PasswordBox;
+                Password = passwordBox.Password;
+                if((Login != null && Login.Equals(@"123")) && (Password != null && Password.Equals("123")))
+                {
+                    MainWindowViewModel.Instance.
+                    //this.clos
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBoxWindow messageBoxWindow = new MessageBoxWindow(e.Message);
+                messageBoxWindow.ShowDialog();
+            }
+        }
 
         protected override void OnDispose()
         {
