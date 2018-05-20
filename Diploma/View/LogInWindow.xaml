@@ -1,0 +1,24 @@
+﻿<Window x:Class="Diploma.View.LogInWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:local="clr-namespace:Diploma"
+        xmlns:viewModel="clr-namespace:Diploma.ViewModel"
+        mc:Ignorable="d"
+        Title="Авторизация" Height="300" Width="300">
+    <Window.Resources>
+        <viewModel:LogInWindowViewModel x:Key="ViewModel"></viewModel:LogInWindowViewModel>
+    </Window.Resources>
+    <Grid DataContext="{StaticResource ViewModel}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="177*"/>
+            <ColumnDefinition Width="115*"/>
+        </Grid.ColumnDefinitions>
+        <TextBox HorizontalAlignment="Left" Height="30" Margin="47,71,0,0" TextWrapping="Wrap" Text="{ Binding Login, Mode=TwoWay, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="201" Grid.ColumnSpan="2"/>
+        <TextBlock HorizontalAlignment="Left" Margin="47,175,0,0" TextWrapping="Wrap" Text="{Binding Login, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Height="22" Width="201" Grid.ColumnSpan="2"/>
+        <PasswordBox HorizontalAlignment="Left" Margin="47,106,0,0" VerticalAlignment="Top" Height="32" Width="201" <!--PasswordChanged="PasswordBox_PasswordChanged"--> Grid.ColumnSpan="2"/>
+        <Button Content="Button" HorizontalAlignment="Left" Height="32" Margin="108,143,0,0" VerticalAlignment="Top" Width="84" Command="{Binding LoginCommand}" Grid.ColumnSpan="2"/>
+    </Grid>
+</Window> 

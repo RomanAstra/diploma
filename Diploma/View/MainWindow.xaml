@@ -24,6 +24,8 @@
                     <MenuItem Command="{Binding OpenCalculate}" Header="Открыть"/>
                     <Separator/>
                     <MenuItem Command="{Binding SaveCalculation}" Header="Сохранить"/>
+                    <Separator/>
+                    <MenuItem Command="{Binding LogIn}" Header="Администрирование"/>
                 </MenuItem>
                 <MenuItem Command="{Binding ShowTheory}" Header="Справочный материал"/>
                 <MenuItem Header="О программе" IsEnabled="False"/>

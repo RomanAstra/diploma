@@ -6,40 +6,9 @@
         mc:Ignorable="d"
         Title="Справка" Height="450" Width="800"
         Background="#333" ResizeMode="CanResizeWithGrip">
-    <!--<Window.Resources>
-        <XmlDataProvider x:Key="xml_help"
-            Source="XMLHelp.xml" XPath="/Help" />
-
-        <HierarchicalDataTemplate x:Key="NodeTemplate"
-            ItemsSource="{Binding XPath=./*}">
-            <TextBlock x:Name="nodetext"/>
-            <HierarchicalDataTemplate.Triggers>
-                <DataTrigger Binding="{Binding Path=NodeType}"
-                    Value="Element">
-                    <Setter TargetName="nodetext" Property="Text"
-                        Value="{Binding Path=Name}" />
-                </DataTrigger>
-            </HierarchicalDataTemplate.Triggers>
-        </HierarchicalDataTemplate>
-    </Window.Resources>
-    <Grid DataContext="{StaticResource xml_help}" Margin="4">
-        <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-
-        <TreeView Name="trvItems" Grid.Row="0"
-            ItemTemplate="{StaticResource NodeTemplate}"
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Stretch"
-            ItemsSource="{Binding}"
-            VirtualizingStackPanel.IsVirtualizing="False"
-            VirtualizingStackPanel.VirtualizationMode="Standard" />
-    </Grid>-->
     <Grid x:Name="Root">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="160"/>
         </Grid.ColumnDefinitions>
     </Grid>
 </Window>

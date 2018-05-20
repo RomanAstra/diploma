@@ -141,7 +141,28 @@ namespace Diploma.ViewModel
         }
         #endregion
 
-#endregion
+        #region Команда авторизации
+        private RelayCommand _logInCommand;
+
+        public ICommand LogIn => _logInCommand ?? (_logInCommand =
+                                           new RelayCommand(LogInCommand));
+
+        public void LogInCommand(object parameter)
+        {
+            try
+            {
+                LogInWindow logInWindow = new LogInWindow();
+                logInWindow.Show();
+            }
+            catch (Exception e)
+            {
+                MessageBoxWindow messageBoxWindow = new MessageBoxWindow(e.Message);
+                messageBoxWindow.ShowDialog();
+            }
+        }
+        #endregion
+
+        #endregion
 
         protected override void OnDispose()
 		{
