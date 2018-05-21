@@ -38,5 +38,10 @@ namespace Diploma.Data
 		{
 			ConcreteFormula.Add(calculation);
 		}
+
+		public static void RemoveItem(Calculation calculation)
+		{
+			ConcreteFormula.Remove(calculation);
+		}
 	}
 }

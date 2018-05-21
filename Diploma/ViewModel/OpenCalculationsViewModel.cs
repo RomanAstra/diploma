@@ -46,7 +46,7 @@ namespace Diploma.ViewModel
 			var temp = o as Calculation;
 			try
 			{
-				CurrentCalculation = temp.DeepCopy();
+				CurrentCalculation = temp;
 			}
 			catch (Exception e)
 			{
@@ -110,6 +110,38 @@ namespace Diploma.ViewModel
 				MessageBoxWindow messageBoxWindow = new MessageBoxWindow(e.Message);
 				messageBoxWindow.ShowDialog();
 			}
+		}
+
+		#endregion
+
+		#region Команда Удаление элемента
+
+		private RelayCommand _deleteCommand;
+
+		public ICommand Delete => _deleteCommand ?? (_deleteCommand =
+			                         new RelayCommand(ExecuteDeleteCommand, CanExecuteDeleteCommand));
+
+		public void ExecuteDeleteCommand(object parameter)
+		{
+			try
+			{
+				var isContains = Calculation.Contains(CurrentCalculation);
+				if (!isContains) return;
+				Calculation.Remove(CurrentCalculation);
+				CalculationListRepositoty.RemoveItem(CurrentCalculation);
+				CalculationListRepositoty.SaveData();
+				CurrentCalculation = null;
+			}
+			catch (Exception e)
+			{
+				MessageBoxWindow messageBoxWindow = new MessageBoxWindow(e.Message);
+				messageBoxWindow.ShowDialog();
+			}
+		}
+
+		public bool CanExecuteDeleteCommand(object parameter)
+		{
+			return CurrentCalculation != null;
 		}
 
 		#endregion

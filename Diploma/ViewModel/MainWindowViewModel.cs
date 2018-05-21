@@ -210,11 +210,11 @@ namespace Diploma.ViewModel
 			_nameCalculate = nameCalculate;
 		}
 
-        /// <summary>
-        /// Проверка результата авторизации
-        /// </summary>
-        /// <param name="nameCalculate"></param>
-        public void SetLogInResult(bool logInResult)
+		/// <summary>
+		/// Проверка результата авторизации
+		/// </summary>
+		/// <param name="logInResult"></param>
+		public void SetLogInResult(bool logInResult)
         {
             if (logInResult)
                 MessageBox.Show("успешно!");

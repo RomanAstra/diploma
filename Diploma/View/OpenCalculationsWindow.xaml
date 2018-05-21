@@ -32,6 +32,7 @@
             </ListView>
             <WrapPanel>
                 <Button Content="Открыть" Command="{Binding Open}" CommandParameter="{Binding ElementName=Main}" Width="120" Height="30" Margin="15"/>
+                <Button Content="Удалить" Command="{Binding Delete}" Width="120" Height="30" Margin="15"/>
                 <Button Content="Закрыть" Command="{Binding Close}" CommandParameter="{Binding ElementName=Main}" Width="120" Height="30" Margin="15"/>
             </WrapPanel>
         </StackPanel>
