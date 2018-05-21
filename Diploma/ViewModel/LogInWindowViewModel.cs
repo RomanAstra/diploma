@@ -12,19 +12,27 @@ namespace Diploma.ViewModel
 {
     class LogInWindowViewModel : ViewModelBase
     {
-        private string login;
-        private string password;
+        private string _login;
+        private string _password;
 
         public string Login
         {
-            get { return login; }
-            set { login = value; }
+            get { return _login; }
+	        set
+	        {
+		        _login = value;
+				OnPropertyChanged(Login);
+	        }
         }
 
         public string Password
         {
-            private get { return password; }
-            set { password = value; }
+            private get { return _password; }
+            set
+            {
+	            _password = value;
+	            OnPropertyChanged(Password);
+            }
         }
 
         private RelayCommand _passwordChanged;
@@ -50,16 +58,16 @@ namespace Diploma.ViewModel
         private RelayCommand _logInCommand;
 
         public ICommand LogIn => _logInCommand ?? (_logInCommand =
-                                           new RelayCommand(LogInCommand));
+                                           new RelayCommand(ExecuteLogInCommand,
+	                                           CanExecuteLogInCommand));
 
-        public void LogInCommand(object parameter)
+        public void ExecuteLogInCommand(object parameter)
         {
             try
             {
                 bool logInResult = false;
-                var passwordBox = parameter as PasswordBox;
-                Password = passwordBox.Password;
-                if ((Login != null && Login.Equals(@"123")) && (Password != null && Password.Equals("123")))
+	            if (parameter is PasswordBox passwordBox) Password = passwordBox.Password;
+	            if ((Login != null && Login.Equals(@"123")) && (Password != null && Password.Equals("123")))
                     logInResult = true;
                 MainWindowViewModel.Instance.SetLogInResult(logInResult);
             }
@@ -68,9 +76,27 @@ namespace Diploma.ViewModel
                 MessageBoxWindow messageBoxWindow = new MessageBoxWindow(e.Message);
                 messageBoxWindow.ShowDialog();
             }
-        }
+		}
 
-        protected override void OnDispose()
+	    public bool CanExecuteLogInCommand(object parameter)
+	    {
+		    return !String.IsNullOrEmpty(Login);
+
+	    }
+
+		private void Password_Error(object sender, ValidationErrorEventArgs e)
+	    {
+		    if (e.Action == ValidationErrorEventAction.Added)
+		    {
+			    ((Control)sender).ToolTip = e.Error.ErrorContent.ToString();
+		    }
+		    else
+		    {
+			    ((Control)sender).ToolTip = "";
+		    }
+	    }
+
+		protected override void OnDispose()
         {
         }
     }
