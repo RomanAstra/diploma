@@ -259,10 +259,16 @@ namespace Diploma.ViewModel
 		public void SetLogInResult(bool logInResult)
         {
             if (logInResult)
-                MessageBox.Show("успешно!");
-            else
-                MessageBox.Show("всё хуйня");
-        }
+			{
+				AdministrationWindow administrationWindow = new AdministrationWindow();
+				administrationWindow.ShowDialog();
+			}
+			else
+			{
+				MessageBoxWindow messageBoxWindow = new MessageBoxWindow("Ошибка входа");
+				messageBoxWindow.ShowDialog();
+			}
+		}
 
         protected override void OnDispose()
 		{

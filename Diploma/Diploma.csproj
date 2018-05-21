@@ -76,9 +76,13 @@
     <Compile Include="Data\FineAggregate.cs" />
     <Compile Include="Data\MixtureMobility.cs" />
     <Compile Include="Data\Calculation.cs" />
+    <Compile Include="ViewModel\AdministrationWindowViewModel.cs" />
     <Compile Include="ViewModel\LogInWindowViewModel.cs" />
     <Compile Include="ViewModel\OpenCalculationsViewModel.cs" />
     <Compile Include="ViewModel\SetNameCalculateWindowViewModel.cs" />
+    <Compile Include="View\AdministrationWindow.xaml.cs">
+      <DependentUpon>AdministrationWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\HelpWindow.xaml.cs">
       <DependentUpon>HelpWindow.xaml</DependentUpon>
     </Compile>
@@ -94,6 +98,10 @@
     <Compile Include="View\SetNameCalculateWindow.xaml.cs">
       <DependentUpon>SetNameCalculateWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\AdministrationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\HelpWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
