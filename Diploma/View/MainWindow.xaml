@@ -16,7 +16,7 @@
         <StackPanel >
             <Menu Margin="10">
                 <MenuItem Header="Фаил">
-                    <MenuItem Header="Новый">
+                    <MenuItem Header="Новый" Command="{Binding NewCalculate}">
                         <MenuItem.Icon>
                             <Path Width="16" Height="16" Stretch="Fill" Fill="{StaticResource FillPath}" Data="{StaticResource new_windowStyle0}" />
                         </MenuItem.Icon>
@@ -53,7 +53,7 @@
                             <ComboBox ItemsSource="{Binding ConcreteFormula.BrandConcreteList}"
                                       DisplayMemberPath="Strength"
                                       SelectedValue="{Binding Path=Calculation.BrandConcrete}"
-                                  Margin="5" Width="180"/>
+                                      Margin="5" Width="180"/>
                             <ComboBox ItemsSource="{Binding ConcreteFormula.CoarseAggregateList, UpdateSourceTrigger=PropertyChanged}"
                                   DisplayMemberPath="FillerType"
                                   SelectedValue="{Binding Path=Calculation.CoarseAggregate}"
@@ -80,6 +80,12 @@
                 </TabItem>
                 <TabItem Header="Дополнительный материал">
                     <StackPanel>
+                    </StackPanel>
+                </TabItem>
+                <TabItem Header="Вывод расчета" IsEnabled="{Binding IsShowCalculation}">
+                    <StackPanel>
+                        <RichTextBox></RichTextBox>
+                        <Button Content="Печать" Height="30"></Button>
                     </StackPanel>
                 </TabItem>
             </TabControl>

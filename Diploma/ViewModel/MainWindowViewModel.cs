@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Input;
 using Diploma.Data;
+using Diploma.Helper;
 using Diploma.Infrastructure;
 using Diploma.View;
 
@@ -11,6 +12,17 @@ namespace Diploma.ViewModel
 	{
 		public static MainWindowViewModel Instance { get; private set; }
 		private string _nameCalculate;
+
+		private bool _isShowCalculation;
+		public bool IsShowCalculation
+		{
+			get => _isShowCalculation;
+			set
+			{
+				_isShowCalculation = value;
+				OnPropertyChanged(nameof(IsShowCalculation));
+			}
+		}
 		public MainWindowViewModel()
 		{
 			Instance = this;
@@ -47,8 +59,7 @@ namespace Diploma.ViewModel
 			}
 		}
 
-
-        #region Commands
+		#region Commands
 
 		#region Команда расчета бетонной смеси
 
@@ -64,6 +75,7 @@ namespace Diploma.ViewModel
 			{
 				MessageBoxWindow messageBoxWindow = new MessageBoxWindow(Calculation.BrandConcrete.Strength);
 				messageBoxWindow.ShowDialog();
+				IsShowCalculation = true;
 			}
 			catch (Exception e)
 			{
@@ -79,13 +91,43 @@ namespace Diploma.ViewModel
 
 		#endregion
 
+		#region Команда создания нового расчета
+
+		private RelayCommand _newCalculateCommand;
+
+		public ICommand NewCalculate => _newCalculateCommand ?? (_newCalculateCommand =
+			                                 new RelayCommand(ExecuteNewCalculateCommand));
+
+		public void ExecuteNewCalculateCommand(object parameter)
+		{
+			try
+			{
+				Calculation = new Calculation
+				{
+					Admixtures = ConcreteFormula?.AdmixturesList[0],
+					BrandConcrete = ConcreteFormula?.BrandConcreteList[0],
+					CementBrand = ConcreteFormula?.CementBrandList[0],
+					CoarseAggregate = ConcreteFormula?.CoarseAggregateList[0],
+					FineAggregate = ConcreteFormula?.FineAggregateList[0],
+					MixtureMobility = ConcreteFormula?.MixtureMobilityList[0]
+				};
+				IsShowCalculation = false;
+			}
+			catch (Exception e)
+			{
+				MessageBoxWindow messageBoxWindow = new MessageBoxWindow(e.Message);
+				messageBoxWindow.ShowDialog();
+			}
+		}
+
+		#endregion		
 
 		#region Команда окрытия списка со сохранеными расчетами
 
 		private RelayCommand _openCalculateCommand;
 
 		public ICommand OpenCalculate => _openCalculateCommand ?? (_openCalculateCommand =
-			                        new RelayCommand(ExecuteOpenCalculateCommand));
+			                                 new RelayCommand(ExecuteOpenCalculateCommand));
 
 		public void ExecuteOpenCalculateCommand(object parameter)
 		{
@@ -101,7 +143,7 @@ namespace Diploma.ViewModel
 			}
 		}
 
-		#endregion	
+		#endregion
 
 		#region Команда сохранения расчета
 

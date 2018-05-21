@@ -18,7 +18,7 @@ namespace Diploma.Data
                 new BrandConcrete {Strength = "M150"},
             };
 
-            CoarseAggregateList = new List<CoarseAggregate>
+            CoarseAggregateList = new ObservableCollection<CoarseAggregate>
             {
                 new CoarseAggregate {FillerType = "Щебень"},
                 new CoarseAggregate {FillerType = "Гравий"},
@@ -26,28 +26,28 @@ namespace Diploma.Data
                 new CoarseAggregate {FillerType = "Твоё очко"},
             };
 
-            FineAggregateList = new List<FineAggregate>
+            FineAggregateList = new ObservableCollection<FineAggregate>
             {
                 new FineAggregate {FillerType = "Песок карьерный"},
                 new FineAggregate {FillerType = "Песок речной"},
                 new FineAggregate {FillerType = "Морские блять ракушки"},
             };
 
-            CementBrandList = new List<CementBrand>
+            CementBrandList = new ObservableCollection<CementBrand>
             {
                 new CementBrand {Brand = "ПЦ300"},
                 new CementBrand {Brand = "ПЦ400"},
                 new CementBrand {Brand = "ПЦ500"},
             };
 
-            MixtureMobilityList = new List<MixtureMobility>
+            MixtureMobilityList = new ObservableCollection<MixtureMobility>
             {
                 new MixtureMobility {Mobility = "Ж1"},
                 new MixtureMobility {Mobility = "Ж2"},
                 new MixtureMobility {Mobility = "П1"},
             };
 
-            AdmixturesList = new List<Admixtures>
+            AdmixturesList = new ObservableCollection<Admixtures>
             {
                 new Admixtures { Admixture="хуй" },
                 new Admixtures { Admixture="пизда" },
@@ -56,10 +56,10 @@ namespace Diploma.Data
         }
 
 		public ObservableCollection<BrandConcrete> BrandConcreteList { get; set; }
-        public List<CoarseAggregate> CoarseAggregateList { get; set; }
-        public List<FineAggregate> FineAggregateList { get; set; }
-        public List<CementBrand> CementBrandList { get; set; }
-        public List<MixtureMobility> MixtureMobilityList { get; set; }
-        public List<Admixtures> AdmixturesList { get; set; }
+        public ObservableCollection<CoarseAggregate> CoarseAggregateList { get; set; }
+        public ObservableCollection<FineAggregate> FineAggregateList { get; set; }
+        public ObservableCollection<CementBrand> CementBrandList { get; set; }
+        public ObservableCollection<MixtureMobility> MixtureMobilityList { get; set; }
+        public ObservableCollection<Admixtures> AdmixturesList { get; set; }
     }
 }
