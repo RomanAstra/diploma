@@ -7,7 +7,7 @@ namespace Diploma.Helper
 {
 	public static class VariablesClass
 	{
-		public static Dictionary<string, string> Senders { get; }
+		public static Dictionary<string, string> Senders { get; private set; }
 
 		private static readonly Admin _admin;
 		private static readonly IData<Admin> _data = new DataXML<Admin>("Admin");
@@ -22,16 +22,33 @@ namespace Diploma.Helper
 					Password = "234"
 				};
 			}
-
-			Senders = new Dictionary<string, string>
-			{
-				{_admin.Login, PasswordClass.GetPassword(_admin.Password)}
-			};
+			SetSenders();
 		}
 
 		public static void SaveData()
 		{
 			if (_admin != null) _data?.Save(_admin);
+		}
+
+		public static void SetLogin(string login)
+		{
+			_admin.Login = login;
+			SetSenders();
+		}
+
+		public static void SetPassword(string password)
+		{
+			_admin.Password = PasswordClass.GetCodPassword(password);
+			SetSenders();
+		}
+
+		private static void SetSenders()
+		{
+			if (_admin == null) return;
+			Senders = new Dictionary<string, string>
+			{
+				{_admin.Login, PasswordClass.GetPassword(_admin.Password)}
+			};
 		}
 
 		[Serializable]

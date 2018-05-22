@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Windows.Input;
 using Diploma.Data;
+using Diploma.Helper;
 using Diploma.Infrastructure;
 using Diploma.View;
 
@@ -62,6 +63,28 @@ namespace Diploma.ViewModel
 			{
 				_isEdit = value;
 				OnPropertyChanged(nameof(IsEdit));
+			}
+		}
+
+		private string _login;
+		private string _password;
+
+		public string Logint
+		{
+			get => _login;
+			set
+			{
+				_login = value;
+				OnPropertyChanged(nameof(Logint));
+			}
+		}
+		public string Password
+		{
+			get => _password;
+			set
+			{
+				_password = value;
+				OnPropertyChanged(nameof(Password));
 			}
 		}
 
@@ -333,6 +356,44 @@ namespace Diploma.ViewModel
 				MessageBoxWindow messageBoxWindow = new MessageBoxWindow(e.Message);
 				messageBoxWindow.ShowDialog();
 			}
+		}
+
+		#endregion
+
+		#region Команда редактирования логина или пароля
+
+		private RelayCommand _editPasswordCommand;
+
+		public ICommand EditPassword => _editPasswordCommand ?? (_editPasswordCommand =
+			                        new RelayCommand(ExecuteEditPasswordCommand, CanExecuteEditPasswordCommand));
+
+		public void ExecuteEditPasswordCommand(object parameter)
+		{
+			try
+			{
+				if (!String.IsNullOrWhiteSpace(Password))
+				{
+					VariablesClass.SetPassword(Password);
+					VariablesClass.SaveData();
+				}
+				if (!String.IsNullOrWhiteSpace(Logint))
+				{
+					VariablesClass.SetPassword(Logint);
+					VariablesClass.SaveData();
+				}
+				Password = String.Empty;
+				Logint = String.Empty;
+			}
+			catch (Exception e)
+			{
+				MessageBoxWindow messageBoxWindow = new MessageBoxWindow(e.Message);
+				messageBoxWindow.ShowDialog();
+			}
+		}
+
+		public bool CanExecuteEditPasswordCommand(object parameter)
+		{
+			return !String.IsNullOrWhiteSpace(Password) || !String.IsNullOrWhiteSpace(Logint);
 		}
 
 		#endregion
