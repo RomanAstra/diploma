@@ -77,6 +77,8 @@
     <Compile Include="Data\ICompositions.cs" />
     <Compile Include="Data\MixtureMobility.cs" />
     <Compile Include="Data\Calculation.cs" />
+    <Compile Include="Helper\PasswordClass.cs" />
+    <Compile Include="Helper\VariablesClass.cs" />
     <Compile Include="Infrastructure\InverseBooleanConverter.cs" />
     <Compile Include="ViewModel\AdministrationWindowViewModel.cs" />
     <Compile Include="ViewModel\LogInWindowViewModel.cs" />

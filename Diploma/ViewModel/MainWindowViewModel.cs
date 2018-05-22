@@ -35,6 +35,7 @@ namespace Diploma.ViewModel
 		        FineAggregate = ConcreteFormula?.FineAggregateList[0],
 		        MixtureMobility = ConcreteFormula?.MixtureMobilityList[0]
 	        };
+			
 		}
 
         private ConcreteFormula _concreteFormula;
@@ -258,18 +259,16 @@ namespace Diploma.ViewModel
 		/// <param name="logInResult"></param>
 		public void SetLogInResult(bool logInResult)
         {
-   //         if (logInResult)
-			//{
-			//	AdministrationWindow administrationWindow = new AdministrationWindow();
-			//	administrationWindow.ShowDialog();
-			//}
-			//else
-			//{
-			//	MessageBoxWindow messageBoxWindow = new MessageBoxWindow("Ошибка входа");
-			//	messageBoxWindow.ShowDialog();
-			//}
-	        AdministrationWindow administrationWindow = new AdministrationWindow();
-	        administrationWindow.ShowDialog();
+			if (logInResult)
+			{
+				AdministrationWindow administrationWindow = new AdministrationWindow();
+				administrationWindow.ShowDialog();
+			}
+			else
+			{
+				MessageBoxWindow messageBoxWindow = new MessageBoxWindow("Ошибка входа");
+				messageBoxWindow.ShowDialog();
+			}
 		}
 
         protected override void OnDispose()

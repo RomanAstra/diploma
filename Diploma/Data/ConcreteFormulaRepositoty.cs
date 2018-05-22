@@ -85,5 +85,101 @@ namespace Diploma.Data
 		{
 			ConcreteFormula.AdmixturesList.Add(item);
 		}
+
+		public static void EditBrandConcrete(BrandConcrete item, string name, string value, string description)
+		{
+			for (var i = 0; i < ConcreteFormula.BrandConcreteList.Count; i++)
+			{
+				if (ConcreteFormula.BrandConcreteList[i] == item)
+				{
+					ConcreteFormula.BrandConcreteList[i] = new BrandConcrete
+					{
+						Name = name,
+						Value = value,
+						Description = description
+					};
+				}
+			}
+		}
+
+		internal static void EditMixtureMobility(MixtureMobility item, string name, string value, string description)
+		{
+			for (var i = 0; i < ConcreteFormula.BrandConcreteList.Count; i++)
+			{
+				if (ConcreteFormula.MixtureMobilityList[i] == item)
+				{
+					ConcreteFormula.BrandConcreteList[i] = new BrandConcrete
+					{
+						Name = name,
+						Value = value,
+						Description = description
+					};
+				}
+			}
+		}
+
+		public static void EditFineAggregate(FineAggregate item, string name, string value, string description)
+		{
+			for (var i = 0; i < ConcreteFormula.BrandConcreteList.Count; i++)
+			{
+				if (ConcreteFormula.FineAggregateList[i] == item)
+				{
+					ConcreteFormula.BrandConcreteList[i] = new BrandConcrete
+					{
+						Name = name,
+						Value = value,
+						Description = description
+					};
+				}
+			}
+		}
+
+		public static void EditCoarseAggregate(CoarseAggregate item, string name, string value, string description)
+		{
+			for (var i = 0; i < ConcreteFormula.BrandConcreteList.Count; i++)
+			{
+				if (ConcreteFormula.CoarseAggregateList[i] == item)
+				{
+					ConcreteFormula.BrandConcreteList[i] = new BrandConcrete
+					{
+						Name = name,
+						Value = value,
+						Description = description
+					};
+				}
+			}
+		}
+
+		public static void EditCementBrand(CementBrand item, string name, string value, string description)
+		{
+			for (var i = 0; i < ConcreteFormula.BrandConcreteList.Count; i++)
+			{
+				if (ConcreteFormula.CementBrandList[i] == item)
+				{
+					ConcreteFormula.BrandConcreteList[i] = new BrandConcrete
+					{
+						Name = name,
+						Value = value,
+						Description = description
+					};
+				}
+			}
+		}
+
+		public static void EditAdmixtures(Admixtures item, string name, string value, string description)
+		{
+			for (var i = 0; i < ConcreteFormula.BrandConcreteList.Count; i++)
+			{
+				if (ConcreteFormula.AdmixturesList[i] == item)
+				{
+					ConcreteFormula.BrandConcreteList[i] = new BrandConcrete
+					{
+						Name = name,
+						Value = value,
+						Description = description
+					};
+				}
+			}
+		}
 	}
 }

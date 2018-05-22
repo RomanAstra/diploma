@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
+using Diploma.Helper;
 
 namespace Diploma.ViewModel
 {
@@ -17,7 +18,7 @@ namespace Diploma.ViewModel
 
         public string Login
         {
-            get { return _login; }
+            get => _login;
 	        set
 	        {
 		        _login = value;
@@ -35,25 +36,29 @@ namespace Diploma.ViewModel
             }
         }
 
-        private RelayCommand _passwordChanged;
+	    #region Зачем это?
 
-        public ICommand PasswordChanged => _logInCommand ?? (_passwordChanged =
-                                           new RelayCommand(PasswordChangedCommand));
+	    private RelayCommand _passwordChanged;
 
-        public void PasswordChangedCommand(object parameter)
-        {
-            try
-            {
+	    public ICommand PasswordChanged => _logInCommand ?? (_passwordChanged =
+		                                       new RelayCommand(PasswordChangedCommand));
+
+	    public void PasswordChangedCommand(object parameter)
+	    {
+		    try
+		    {
                
-            }
-            catch (Exception e)
-            {
-                MessageBoxWindow messageBoxWindow = new MessageBoxWindow(e.Message);
-                messageBoxWindow.ShowDialog();
-            }
-        }
+		    }
+		    catch (Exception e)
+		    {
+			    MessageBoxWindow messageBoxWindow = new MessageBoxWindow(e.Message);
+			    messageBoxWindow.ShowDialog();
+		    }
+	    }
 
-        public event EventHandler LoginCompleted;
+	    public event EventHandler LoginCompleted;
+
+	    #endregion
 
         private RelayCommand _logInCommand;
 
@@ -65,11 +70,16 @@ namespace Diploma.ViewModel
         {
             try
             {
-                bool logInResult = false;
-	            if (parameter is PasswordBox passwordBox) Password = passwordBox.Password;
-	            if ((Login != null && Login.Equals(@"123")) && (Password != null && Password.Equals("123")))
-                    logInResult = true;
-                MainWindowViewModel.Instance.SetLogInResult(logInResult);
+	            if (parameter is PasswordBox passwordBox)
+				{
+					Password = passwordBox.Password;
+				}
+
+				if (VariablesClass.Senders.ContainsKey(Login)
+					&& VariablesClass.Senders[Login] == Password)
+				{
+					MainWindowViewModel.Instance.SetLogInResult(true);
+				}
             }
             catch (Exception e)
             {
@@ -84,7 +94,9 @@ namespace Diploma.ViewModel
 
 	    }
 
-		private void Password_Error(object sender, ValidationErrorEventArgs e)
+	    #region Потом добавлю валидацию пароля
+
+	    private void Password_Error(object sender, ValidationErrorEventArgs e)
 	    {
 		    if (e.Action == ValidationErrorEventAction.Added)
 		    {
@@ -95,6 +107,8 @@ namespace Diploma.ViewModel
 			    ((Control)sender).ToolTip = "";
 		    }
 	    }
+
+	    #endregion
 
 		protected override void OnDispose()
         {

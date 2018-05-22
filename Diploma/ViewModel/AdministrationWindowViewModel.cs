@@ -66,7 +66,7 @@ namespace Diploma.ViewModel
 		}
 
 		private Dictionary<string, ICollection> _compositions;
-		
+
 		public Dictionary<string, ICollection> Compositions
 		{
 			get => _compositions;
@@ -109,7 +109,7 @@ namespace Diploma.ViewModel
 		private RelayCommand _closeCommand;
 
 		public ICommand Close => _closeCommand ?? (_closeCommand =
-			                         new RelayCommand(ExecuteCloseCommand));
+									 new RelayCommand(ExecuteCloseCommand));
 		public void ExecuteCloseCommand(object parameter)
 		{
 			try
@@ -133,7 +133,7 @@ namespace Diploma.ViewModel
 		private RelayCommand _selectioCommand;
 
 		public ICommand SelectioCommand => _selectioCommand
-		                                   ?? (_selectioCommand = new RelayCommand(ExecuteSelectioCommand));
+										   ?? (_selectioCommand = new RelayCommand(ExecuteSelectioCommand));
 
 		private void ExecuteSelectioCommand(object o)
 		{
@@ -152,14 +152,14 @@ namespace Diploma.ViewModel
 		}
 
 		#endregion
-		
+
 		#region Команда выбора элемента списка
 
 		private RelayCommand _selectioListItemCommand;
 
 		public ICommand SelectioListItemCommand => _selectioListItemCommand
-										   ?? (_selectioListItemCommand = 
-			                                   new RelayCommand(ExecuteSelectioListItemCommand));
+										   ?? (_selectioListItemCommand =
+											   new RelayCommand(ExecuteSelectioListItemCommand));
 
 		private void ExecuteSelectioListItemCommand(object o)
 		{
@@ -215,8 +215,10 @@ namespace Diploma.ViewModel
 			try
 			{
 				IsEdit = true;
-				_action = Action.Add;
-				_concreteItem = null;
+				_action = Action.Edit;
+				NameItem = _concreteItem.Name;
+				ValueItem = _concreteItem.Value;
+				DescriptionItem = _concreteItem.Description;
 			}
 			catch (Exception e)
 			{
@@ -265,26 +267,31 @@ namespace Diploma.ViewModel
 		private RelayCommand _saveCommand;
 
 		public ICommand Save => _saveCommand ?? (_saveCommand =
-			                       new RelayCommand(ExecuteSaveCommand,CanExecuteSaveCommand));
+								   new RelayCommand(ExecuteSaveCommand, CanExecuteSaveCommand));
 
 		public void ExecuteSaveCommand(object parameter)
 		{
 			try
 			{
-				if (CurrentCompositions is IList tempItem)
+				if (_action == Action.Add)
 				{
-					var o = tempItem[0] as ICompositions;
-					if (_action == Action.Add)
+					if (CurrentCompositions is IList tempItem)
 					{
+						var o = tempItem[0] as ICompositions;
+
 						AddCompositions(o);
 					}
+				}
+				if (_action == Action.Edit)
+				{
+					EditCompositions(_concreteItem);
 				}
 
 				IsEdit = false;
 				_action = Action.Null;
 				_concreteItem = null;
 
-				NameItem =String.Empty;
+				NameItem = String.Empty;
 				ValueItem = String.Empty;
 				DescriptionItem = String.Empty;
 			}
@@ -307,7 +314,7 @@ namespace Diploma.ViewModel
 		private RelayCommand _cancelCommand;
 
 		public ICommand Cancel => _cancelCommand ?? (_cancelCommand =
-			                        new RelayCommand(ExecuteCancelCommand));
+									new RelayCommand(ExecuteCancelCommand));
 
 		public void ExecuteCancelCommand(object parameter)
 		{
@@ -424,9 +431,41 @@ namespace Diploma.ViewModel
 			ConcreteFormulaRepositoty.SaveData();
 		}
 
+		private void EditCompositions(ICompositions compositions)
+		{
+			switch (compositions)
+			{
+				case BrandConcrete item:
+					ConcreteFormulaRepositoty.EditBrandConcrete(item, NameItem,ValueItem,DescriptionItem);
+					break;
+				case Admixtures item:
+					ConcreteFormulaRepositoty.EditAdmixtures(item, NameItem, ValueItem, DescriptionItem);
+					break;
+				case CementBrand item:
+					ConcreteFormulaRepositoty.EditCementBrand(item, NameItem, ValueItem, DescriptionItem);
+					break;
+				case CoarseAggregate item:
+					ConcreteFormulaRepositoty.EditCoarseAggregate(item, NameItem, ValueItem, DescriptionItem);
+					break;
+				case FineAggregate item:
+					ConcreteFormulaRepositoty.EditFineAggregate(item, NameItem, ValueItem, DescriptionItem);
+					break;
+				case MixtureMobility item:
+					ConcreteFormulaRepositoty.EditMixtureMobility(item, NameItem, ValueItem, DescriptionItem);
+					break;
+				case null:
+					throw new Exception("Не выбран объект");
+				default:
+					Console.WriteLine("Объект другого типа");
+					break;
+			}
+
+			ConcreteFormulaRepositoty.SaveData();
+		}
+
 		protected override void OnDispose()
 		{
-			
+
 		}
 	}
 }

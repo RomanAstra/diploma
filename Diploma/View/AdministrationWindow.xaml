@@ -82,7 +82,11 @@
                 </TabItem>
                 <TabItem Header="Редактирование учетной записи администратора">
                     <StackPanel>
-
+                        <Label Content="Логин" Foreground="#FF00D1FF" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBox Text="{Binding NameItem, UpdateSourceTrigger=PropertyChanged}" Margin="15,5,15,15"/>
+                        <Label Content="Пароль" Foreground="#FF00D1FF" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBox Text="{Binding ValueItem, UpdateSourceTrigger=PropertyChanged}" Margin="15,5,15,15"/>
+                        <Button Content="Ok" Command="{Binding EditPassword}" Width="120" Height="30" Margin="15,5,5,5"/>
                     </StackPanel>
                 </TabItem>
             </TabControl>
