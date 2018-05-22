@@ -73,7 +73,7 @@ namespace Diploma.ViewModel
 		{
 			try
 			{
-				MessageBoxWindow messageBoxWindow = new MessageBoxWindow(Calculation.BrandConcrete.Strength);
+				MessageBoxWindow messageBoxWindow = new MessageBoxWindow(Calculation.BrandConcrete.Name);
 				messageBoxWindow.ShowDialog();
 				IsShowCalculation = true;
 			}
@@ -258,16 +258,18 @@ namespace Diploma.ViewModel
 		/// <param name="logInResult"></param>
 		public void SetLogInResult(bool logInResult)
         {
-            if (logInResult)
-			{
-				AdministrationWindow administrationWindow = new AdministrationWindow();
-				administrationWindow.ShowDialog();
-			}
-			else
-			{
-				MessageBoxWindow messageBoxWindow = new MessageBoxWindow("Ошибка входа");
-				messageBoxWindow.ShowDialog();
-			}
+   //         if (logInResult)
+			//{
+			//	AdministrationWindow administrationWindow = new AdministrationWindow();
+			//	administrationWindow.ShowDialog();
+			//}
+			//else
+			//{
+			//	MessageBoxWindow messageBoxWindow = new MessageBoxWindow("Ошибка входа");
+			//	messageBoxWindow.ShowDialog();
+			//}
+	        AdministrationWindow administrationWindow = new AdministrationWindow();
+	        administrationWindow.ShowDialog();
 		}
 
         protected override void OnDispose()

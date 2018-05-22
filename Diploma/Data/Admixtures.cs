@@ -3,9 +3,8 @@
 namespace Diploma.Data
 {
     [Serializable]
-    public class Admixtures
-    {
-	    public string Admixture { get; set; }
+    public class Admixtures : ICompositions
+	{
 	    public string Name { get; set; }
 	    public string Value { get; set; }
 	    public string Description { get; set; }

@@ -3,9 +3,8 @@
 namespace Diploma.Data
 {
 	[Serializable]
-	public class CoarseAggregate
+	public class CoarseAggregate : ICompositions
 	{ 
-        public string FillerType { get; set; }
 		public string Name { get; set; }
 		public string Value { get; set; }
 		public string Description { get; set; }

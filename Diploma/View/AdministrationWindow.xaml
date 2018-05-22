@@ -5,16 +5,55 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Diploma.View"
         xmlns:viewModel="clr-namespace:Diploma.ViewModel"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         mc:Ignorable="d"
-        Title="AdministrationWindow" Name="Main" Height="479.82" Width="800" Background="#333" ResizeMode="CanResizeWithGrip" WindowState="Maximized" FontFamily="Times New Roman">
+        Title="AdministrationWindow" Name="Main" Height="574.643" Width="800" Background="#333" ResizeMode="CanResizeWithGrip" WindowState="Maximized" FontFamily="Times New Roman">
     <Window.Resources>
         <viewModel:AdministrationWindowViewModel x:Key="ViewModel"></viewModel:AdministrationWindowViewModel>
     </Window.Resources>
     <Grid DataContext="{StaticResource ViewModel}">
         <StackPanel >
-            <TabControl Margin="0,10,10,10" Height="361">
+            <TabControl Margin="0,10,10,10" Height="458">
                 <TabItem Header="Редактирование ингредиентов">
                     <StackPanel>
+                        <WrapPanel Orientation="Horizontal">
+                            <ComboBox Name="MainComboBox" Width="453" Margin="5" 
+                                      ItemsSource="{Binding Compositions.Keys}"
+                                      SelectedIndex="0">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectionChanged">
+                                        <i:InvokeCommandAction
+                                            Command="{Binding SelectioCommand}"
+                                            CommandParameter="{Binding ElementName=MainComboBox, Path=SelectedItem}">
+                                        </i:InvokeCommandAction>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </ComboBox>
+                        </WrapPanel>
+                        <WrapPanel Orientation="Horizontal">
+                            <ListView Name="MainListView" Margin="10" ItemsSource ="{Binding CurrentCompositions}" Height="255">
+                                <ListView.View>
+                                    <GridView AllowsColumnReorder="True">
+                                        <GridViewColumn DisplayMemberBinding="{Binding Path=Name}" Header="Название" Width="120"/>
+                                        <GridViewColumn DisplayMemberBinding="{Binding Path=Value}" Header="Значение" Width="160" />
+                                        <GridViewColumn DisplayMemberBinding="{Binding Path=Description}" Header="Описание" Width="160" />
+                                    </GridView>
+                                </ListView.View>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectionChanged">
+                                        <i:InvokeCommandAction
+                                            Command="{Binding SelectioListItemCommand}"
+                                            CommandParameter="{Binding ElementName=MainListView, Path=SelectedItem}">
+                                        </i:InvokeCommandAction>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </ListView>
+                        </WrapPanel>
+                        <WrapPanel>
+                            <Button Content="Добавить" Command="{Binding Close}" CommandParameter="{Binding ElementName=Main}" Width="120" Height="30" Margin="15"/>
+                            <Button Content="Изменить" Command="{Binding Close}" CommandParameter="{Binding ElementName=Main}" Width="120" Height="30" Margin="15"/>
+                            <Button Content="Удалить" Command="{Binding Close}" CommandParameter="{Binding ElementName=Main}" Width="120" Height="30" Margin="15"/>
+                        </WrapPanel>
                     </StackPanel>
                 </TabItem>
                 <TabItem Header="Редактирование теории">
@@ -23,13 +62,12 @@
                 </TabItem>
                 <TabItem Header="Редактирование учетной записи администратора">
                     <StackPanel>
-                       
+
                     </StackPanel>
                 </TabItem>
             </TabControl>
             <WrapPanel>
-                <Button Content="Сохранить и закрыть" Command="{Binding SaveAndClose}" CommandParameter="{Binding ElementName=Main}" Width="120" Height="30" Margin="15"/>
-               <Button Content="Закрыть" Command="{Binding Close}" CommandParameter="{Binding ElementName=Main}" Width="120" Height="30" Margin="15"/>
+                <Button Content="Закрыть" Command="{Binding Close}" CommandParameter="{Binding ElementName=Main}" Width="120" Height="30" Margin="15"/>
             </WrapPanel>
         </StackPanel>
     </Grid>
