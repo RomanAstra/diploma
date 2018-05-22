@@ -50,9 +50,9 @@
                             </ListView>
                         </WrapPanel>
                         <WrapPanel>
-                            <Button Content="Добавить" Command="{Binding Close}" CommandParameter="{Binding ElementName=Main}" Width="120" Height="30" Margin="15"/>
-                            <Button Content="Изменить" Command="{Binding Close}" CommandParameter="{Binding ElementName=Main}" Width="120" Height="30" Margin="15"/>
-                            <Button Content="Удалить" Command="{Binding Close}" CommandParameter="{Binding ElementName=Main}" Width="120" Height="30" Margin="15"/>
+                            <Button Content="Добавить" Command="{Binding Add}" CommandParameter="{Binding ElementName=Main}" Width="120" Height="30" Margin="15"/>
+                            <Button Content="Изменить" Command="{Binding Edit}" CommandParameter="{Binding ElementName=Main}" Width="120" Height="30" Margin="15"/>
+                            <Button Content="Удалить" Command="{Binding Delete}" CommandParameter="{Binding ElementName=Main}" Width="120" Height="30" Margin="15"/>
                         </WrapPanel>
                     </StackPanel>
                 </TabItem>

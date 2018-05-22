@@ -14,10 +14,11 @@ namespace Diploma.ViewModel
 	{
 		private readonly ConcreteFormula _concreteFormula;
 		private ICompositions _concreteItem;
+		private string _concreteKey;
 
-		private Dictionary<string, IList> _compositions;
+		private Dictionary<string, ICollection> _compositions;
 		
-		public Dictionary<string, IList> Compositions
+		public Dictionary<string, ICollection> Compositions
 		{
 			get => _compositions;
 			set
@@ -27,9 +28,9 @@ namespace Diploma.ViewModel
 			}
 		}
 
-		private IList _currentCompositions;
+		private ICollection _currentCompositions;
 
-		public IList CurrentCompositions
+		public ICollection CurrentCompositions
 		{
 			get => _currentCompositions;
 			set
@@ -42,15 +43,16 @@ namespace Diploma.ViewModel
 		public AdministrationWindowViewModel()
 		{
 			_concreteFormula = ConcreteFormulaRepositoty.ConcreteFormula;
-			Compositions = new Dictionary<string, IList>
+			Compositions = new Dictionary<string, ICollection>
 			{
-				{"Класс бетона", _concreteFormula?.BrandConcreteList.ToList()},
-				{"Крупный заполнитель", _concreteFormula?.CoarseAggregateList.ToList()},
-				{"Мелкий заполнитель", _concreteFormula?.FineAggregateList.ToList()},
-				{"Марка цемента", _concreteFormula?.CementBrandList.ToList()},
-				{"Подвижность смеси", _concreteFormula?.MixtureMobilityList.ToList()},
-				{"Примеси", _concreteFormula?.AdmixturesList.ToList()},
+				{"Класс бетона", _concreteFormula?.BrandConcreteList},
+				{"Крупный заполнитель", _concreteFormula?.CoarseAggregateList},
+				{"Мелкий заполнитель", _concreteFormula?.FineAggregateList},
+				{"Марка цемента", _concreteFormula?.CementBrandList},
+				{"Подвижность смеси", _concreteFormula?.MixtureMobilityList},
+				{"Примеси", _concreteFormula?.AdmixturesList},
 			};
+			_currentCompositions = Compositions["Класс бетона"];
 		}
 
 		#region Команда закрытия формы
@@ -86,11 +88,12 @@ namespace Diploma.ViewModel
 
 		private void ExecuteSelectioCommand(object o)
 		{
-			var temp = o.ToString();
 			try
 			{
-				if (!Compositions.ContainsKey(temp)) return;
-				CurrentCompositions = Compositions[temp];
+				_concreteKey = o.ToString();
+				if (!Compositions.ContainsKey(_concreteKey)) return;
+				CurrentCompositions = Compositions[_concreteKey];
+				_concreteItem = null;
 			}
 			catch (Exception e)
 			{
@@ -126,6 +129,116 @@ namespace Diploma.ViewModel
 		}
 
 		#endregion
+
+		#region Команда добавления элемента
+
+		private RelayCommand _addCommand;
+
+		public ICommand Add => _addCommand ?? (_addCommand =
+									new RelayCommand(ExecuteAddCommand));
+
+		public void ExecuteAddCommand(object parameter)
+		{
+			try
+			{
+				_concreteItem = null;
+			}
+			catch (Exception e)
+			{
+				MessageBoxWindow messageBoxWindow = new MessageBoxWindow(e.Message);
+				messageBoxWindow.ShowDialog();
+			}
+		}
+
+		#endregion
+
+		#region Команда редактирования элемента
+
+		private RelayCommand _editCommand;
+
+		public ICommand Edit => _editCommand ?? (_editCommand =
+									 new RelayCommand(ExecuteEditCommand,
+										 CanExecuteEditCommand));
+
+		public void ExecuteEditCommand(object parameter)
+		{
+			try
+			{
+				_concreteItem = null;
+			}
+			catch (Exception e)
+			{
+				MessageBoxWindow messageBoxWindow = new MessageBoxWindow(e.Message);
+				messageBoxWindow.ShowDialog();
+			}
+		}
+
+		public bool CanExecuteEditCommand(object parameter)
+		{
+			return _concreteItem != null;
+		}
+
+		#endregion
+
+		#region Команда Удаление элемента
+
+		private RelayCommand _deleteCommand;
+
+		public ICommand Delete => _deleteCommand ?? (_deleteCommand =
+									 new RelayCommand(ExecuteDeleteCommand, CanExecuteDeleteCommand));
+
+		public void ExecuteDeleteCommand(object parameter)
+		{
+			try
+			{
+				DeleteCompositions(_concreteItem);
+				_concreteItem = null;
+			}
+			catch (Exception e)
+			{
+				MessageBoxWindow messageBoxWindow = new MessageBoxWindow(e.Message);
+				messageBoxWindow.ShowDialog();
+			}
+		}
+
+		public bool CanExecuteDeleteCommand(object parameter)
+		{
+			return _concreteItem != null;
+		}
+
+		#endregion
+
+		private void DeleteCompositions(ICompositions compositions)
+		{
+			switch (compositions)
+			{
+				case BrandConcrete item:
+					ConcreteFormulaRepositoty.DeleteBrandConcrete(item);
+					break;
+				case Admixtures item:
+					ConcreteFormulaRepositoty.DeleteAdmixtures(item);
+					break;
+				case CementBrand item:
+					ConcreteFormulaRepositoty.DeleteCementBrand(item);
+					break;
+				case CoarseAggregate item:
+					ConcreteFormulaRepositoty.DeleteCoarseAggregate(item);
+					break;
+				case FineAggregate item:
+					ConcreteFormulaRepositoty.DeleteFineAggregate(item);
+					break;
+				case MixtureMobility item:
+					ConcreteFormulaRepositoty.DeleteMixtureMobility(item);
+					break;
+				case null:
+					throw new Exception("Не выбран объект");
+				default:
+					Console.WriteLine("Объект другого типа");
+					break;
+			}
+
+			//ConcreteFormulaRepositoty.SaveData();
+		}
 
 		protected override void OnDispose()
 		{
