@@ -55,5 +55,35 @@ namespace Diploma.Data
 		{
 			ConcreteFormula.AdmixturesList.Remove(item);
 		}
+
+		public static void AddBrandConcrete(BrandConcrete item)
+		{
+			ConcreteFormula.BrandConcreteList.Add(item);
+		}
+
+		internal static void AddMixtureMobility(MixtureMobility item)
+		{
+			ConcreteFormula.MixtureMobilityList.Add(item);
+		}
+
+		public static void AddFineAggregate(FineAggregate item)
+		{
+			ConcreteFormula.FineAggregateList.Add(item);
+		}
+
+		public static void AddCoarseAggregate(CoarseAggregate item)
+		{
+			ConcreteFormula.CoarseAggregateList.Add(item);
+		}
+
+		public static void AddCementBrand(CementBrand item)
+		{
+			ConcreteFormula.CementBrandList.Add(item);
+		}
+
+		public static void AddAdmixtures(Admixtures item)
+		{
+			ConcreteFormula.AdmixturesList.Add(item);
+		}
 	}
 }
