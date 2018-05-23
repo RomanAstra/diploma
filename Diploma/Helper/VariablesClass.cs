@@ -6,7 +6,7 @@ namespace Diploma.Helper
 {
 	public static class VariablesClass
 	{
-		public static Dictionary<string, string> Senders { get; private set; }
+		public static Dictionary<string, string> Admins { get; private set; }
 
 		private static readonly Admin _admin;
 		private static readonly IData<Admin> _data = new DataDb<Admin>("Admin");
@@ -21,7 +21,7 @@ namespace Diploma.Helper
 					Password = "234"
 				};
 			}
-			SetSenders();
+			SetAdmin();
 		}
 
 		public static void SaveData()
@@ -32,19 +32,19 @@ namespace Diploma.Helper
 		public static void SetLogin(string login)
 		{
 			_admin.Login = login;
-			SetSenders();
+			SetAdmin();
 		}
 
 		public static void SetPassword(string password)
 		{
 			_admin.Password = PasswordClass.GetCodPassword(password);
-			SetSenders();
+			SetAdmin();
 		}
 
-		private static void SetSenders()
+		private static void SetAdmin()
 		{
 			if (_admin == null) return;
-			Senders = new Dictionary<string, string>
+			Admins = new Dictionary<string, string>
 			{
 				{_admin.Login, PasswordClass.GetPassword(_admin.Password)}
 			};

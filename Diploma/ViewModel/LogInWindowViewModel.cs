@@ -75,12 +75,16 @@ namespace Diploma.ViewModel
 					Password = passwordBox.Password;
 				}
 
-				if (VariablesClass.Senders.ContainsKey(Login)
-					&& VariablesClass.Senders[Login] == Password)
+				if (VariablesClass.Admins.ContainsKey(Login)
+					&& VariablesClass.Admins[Login] == Password)
 				{
 					MainWindowViewModel.Instance.SetLogInResult(true);
 				}
-            }
+				else
+				{
+					MainWindowViewModel.Instance.SetLogInResult(false);
+				}
+			}
             catch (Exception e)
             {
                 MessageBoxWindow messageBoxWindow = new MessageBoxWindow(e.Message);
