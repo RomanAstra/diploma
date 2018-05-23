@@ -1,5 +1,5 @@
 ﻿using System;
-using Diploma.DataSave;
+using DataDB;
 
 namespace Diploma.Data
 {
@@ -15,7 +15,7 @@ namespace Diploma.Data
 			set => _concreteFormula = value;
 		}
 
-		private static readonly IData<ConcreteFormula> _data = new DataXML<ConcreteFormula>("Data");
+		private static readonly IData<ConcreteFormula> _data = new DataDb<ConcreteFormula>("Data");
 		static ConcreteFormulaRepositoty()
 		{
 			ConcreteFormula = _data?.Load();

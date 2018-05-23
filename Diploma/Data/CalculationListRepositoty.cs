@@ -1,6 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
-using Diploma.DataSave;
+using DataDB;
 
 namespace Diploma.Data
 {
@@ -16,7 +16,7 @@ namespace Diploma.Data
 			set => _concreteFormula = value;
 		}
 
-		private static readonly IData<Calculation[]> _data = new DataXML<Calculation[]>("Calculations");
+		private static readonly IData<Calculation[]> _data = new DataDb<Calculation[]>("Calculations");
 		static CalculationListRepositoty()
 		{
 			var tempList = _data?.Load();

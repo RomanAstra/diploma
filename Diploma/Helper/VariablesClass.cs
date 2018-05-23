@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Diploma.Data;
-using Diploma.DataSave;
+using DataDB;
 
 namespace Diploma.Helper
 {
@@ -10,7 +9,7 @@ namespace Diploma.Helper
 		public static Dictionary<string, string> Senders { get; private set; }
 
 		private static readonly Admin _admin;
-		private static readonly IData<Admin> _data = new DataXML<Admin>("Admin");
+		private static readonly IData<Admin> _data = new DataDb<Admin>("Admin");
 		static VariablesClass()
 		{
 			_admin = _data?.Load();
