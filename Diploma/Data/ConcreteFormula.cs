@@ -39,9 +39,9 @@ namespace Diploma.Data
 
 			FineAggregateList = new ObservableCollection<FineAggregate>
 			{
-				new FineAggregate {Name = "Песок мелкий"},
-				new FineAggregate {Name = "Песок средний"},
-				new FineAggregate {Name = "Песок крупный"},
+				new FineAggregate {Name = "Песок мелкий|1.1-1.8mm", Value = "-5"},
+				new FineAggregate {Name = "Песок средний|2-2.5mm", Value = "0"},
+				new FineAggregate {Name = "Песок крупный|более 2.5mm", Value = "5"},
 			};
 
 			CementBrandList = new ObservableCollection<CementBrand>

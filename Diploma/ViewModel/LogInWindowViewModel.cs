@@ -36,30 +36,6 @@ namespace Diploma.ViewModel
             }
         }
 
-	    #region Зачем это?
-
-	    private RelayCommand _passwordChanged;
-
-	    public ICommand PasswordChanged => _logInCommand ?? (_passwordChanged =
-		                                       new RelayCommand(PasswordChangedCommand));
-
-	    public void PasswordChangedCommand(object parameter)
-	    {
-		    try
-		    {
-               
-		    }
-		    catch (Exception e)
-		    {
-			    MessageBoxWindow messageBoxWindow = new MessageBoxWindow(e.Message);
-			    messageBoxWindow.ShowDialog();
-		    }
-	    }
-
-	    public event EventHandler LoginCompleted;
-
-	    #endregion
-
         private RelayCommand _logInCommand;
 
         public ICommand LogIn => _logInCommand ?? (_logInCommand =
