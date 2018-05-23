@@ -75,7 +75,7 @@ namespace Diploma.ViewModel
 		{
 			try
 			{
-				MessageBoxWindow messageBoxWindow = new MessageBoxWindow(Calculation.BrandConcrete.Name);
+				MessageBoxWindow messageBoxWindow = new MessageBoxWindow($"{Calculation.WaterAndCementValues()} + {Calculation.VDelC()}");
 				messageBoxWindow.ShowDialog();
 				IsShowCalculation = true;
 			}
