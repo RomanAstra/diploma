@@ -85,7 +85,7 @@
                 <TabItem Header="Вывод расчета" IsEnabled="{Binding IsShowCalculation}">
                     <StackPanel>
                         <RichTextBox></RichTextBox>
-                        <Button Content="Печать" Height="30"></Button>
+                        <Button Command="{Binding Export}" Content="Сформировать документ" Height="30"></Button>
                     </StackPanel>
                 </TabItem>
             </TabControl>

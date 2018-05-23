@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Input;
 using Diploma.Data;
+using Diploma.Export;
 using Diploma.Helper;
 using Diploma.Infrastructure;
 using Diploma.View;
@@ -193,7 +194,7 @@ namespace Diploma.ViewModel
             try
             {
 				HelpWindow helpWindow = new HelpWindow();
-                helpWindow.Show();
+                helpWindow.ShowDialog();
             }
             catch (Exception e)
             {
@@ -222,9 +223,31 @@ namespace Diploma.ViewModel
                 messageBoxWindow.ShowDialog();
             }
         }
-        #endregion
+		#endregion
 
-        #endregion
+		#region Команда формирования отчета
+		private RelayCommand _exportCommand;
+
+		public ICommand Export => _exportCommand ?? (_exportCommand =
+			                         new RelayCommand(ExportCommand));
+
+		public void ExportCommand(object parameter)
+		{
+			try
+			{
+				var export = new WordExport();
+				export.Export();
+
+			}
+			catch (Exception e)
+			{
+				MessageBoxWindow messageBoxWindow = new MessageBoxWindow(e.Message);
+				messageBoxWindow.ShowDialog();
+			}
+		}
+		#endregion
+
+		#endregion
 
 		/// <summary>
 		/// Проверяет хорошо ли заполнена форма

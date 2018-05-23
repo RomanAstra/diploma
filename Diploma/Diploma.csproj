@@ -58,6 +58,9 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="Xceed.Words.NET, Version=1.1.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocX.1.1.0\lib\Xceed.Words.NET.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -77,6 +80,7 @@
     <Compile Include="Data\ICompositions.cs" />
     <Compile Include="Data\MixtureMobility.cs" />
     <Compile Include="Data\Calculation.cs" />
+    <Compile Include="Export\WordExport.cs" />
     <Compile Include="Helper\PasswordClass.cs" />
     <Compile Include="Helper\VariablesClass.cs" />
     <Compile Include="Infrastructure\InverseBooleanConverter.cs" />
