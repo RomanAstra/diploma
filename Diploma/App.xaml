@@ -13,6 +13,7 @@
                 <ResourceDictionary Source="Themes/Icons.xaml">
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
+            <BitmapImage x:Key="step1image"  UriSource="/Images/step1.png" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>
