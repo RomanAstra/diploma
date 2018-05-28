@@ -6,9 +6,8 @@
         mc:Ignorable="d"
         Title="Справка" Height="450" Width="800"
         Background="#333" ResizeMode="CanResizeWithGrip">
-    <Grid x:Name="Root">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
+    <Grid>
+
+        <TreeView  x:Name="Root"></TreeView>
     </Grid>
 </Window>
