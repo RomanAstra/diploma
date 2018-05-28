@@ -7,7 +7,7 @@
         xmlns:viewModel="clr-namespace:Diploma.ViewModel"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         mc:Ignorable="d"
-        Title="CloseCalculationsWindow" Name="Main" Height="450" Width="800"
+        Title="Сохраненные расчеты" Name="Main" Height="450" Width="800"
         Background="#333" ResizeMode="CanResizeWithGrip">
     <Window.Resources>
         <viewModel:OpenCalculationsViewModel x:Key="ViewModel"></viewModel:OpenCalculationsViewModel>

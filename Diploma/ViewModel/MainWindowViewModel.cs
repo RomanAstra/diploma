@@ -249,6 +249,28 @@ namespace Diploma.ViewModel
 		}
 		#endregion
 
+		#region Команда открытия справки
+		private RelayCommand _openAboutCommand;
+
+		public ICommand About => _openAboutCommand ?? (_openAboutCommand =
+									 new RelayCommand(OpenAboutCommand));
+
+		public void OpenAboutCommand(object parameter)
+		{
+			try
+			{
+				var help = new AboutWindow();
+				help.ShowDialog();
+
+			}
+			catch (Exception e)
+			{
+				MessageBoxWindow messageBoxWindow = new MessageBoxWindow(e.Message);
+				messageBoxWindow.ShowDialog();
+			}
+		}
+		#endregion
+
 		#endregion
 
 		/// <summary>

@@ -8,7 +8,7 @@
         xmlns:infrastructure="clr-namespace:Diploma.Infrastructure"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         mc:Ignorable="d"
-        Title="AdministrationWindow" Name="Main" Height="574.643" Width="800" Background="#333" ResizeMode="CanResizeWithGrip" WindowState="Maximized" FontFamily="Times New Roman">
+        Title="Администрирования" Name="Main" Height="574.643" Width="800" Background="#333" ResizeMode="CanResizeWithGrip" WindowState="Maximized" FontFamily="Times New Roman">
     <Window.Resources>
         <viewModel:AdministrationWindowViewModel x:Key="ViewModel"></viewModel:AdministrationWindowViewModel>
         <infrastructure:InverseBooleanConverter x:Key="Converter"></infrastructure:InverseBooleanConverter>
@@ -75,10 +75,6 @@
                             </WrapPanel>
                         </StackPanel>
                     </Grid>
-                </TabItem>
-                <TabItem Header="Редактирование теории">
-                    <StackPanel>
-                    </StackPanel>
                 </TabItem>
                 <TabItem Header="Редактирование учетной записи администратора">
                     <StackPanel>

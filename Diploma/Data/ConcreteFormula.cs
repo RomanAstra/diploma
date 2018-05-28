@@ -66,9 +66,9 @@ namespace Diploma.Data
 
 			AdmixturesList = new ObservableCollection<Admixtures>
 			{
-				new Admixtures { Name="gtx 332" },
-				new Admixtures { Name="sft 147" },
-				new Admixtures { Name="srt 488" },
+				new Admixtures { Name="MasterGlenium 101" },
+				new Admixtures { Name="MasterGlenium 116W" },
+				new Admixtures { Name="MasterGlenium 806 PAV" },
 			};
 		}
 

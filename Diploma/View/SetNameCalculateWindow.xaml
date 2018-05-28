@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Diploma.View"
         xmlns:viewModel="clr-namespace:Diploma.ViewModel"
         mc:Ignorable="d"
-        Title="Window" Name="Main"  Background="#333" FontFamily="Times New Roman" Height="160" Width="800" MinWidth="800" MinHeight="160" MaxWidth="800" MaxHeight="160">
+        Title="Имя расчета" Name="Main"  Background="#333" FontFamily="Times New Roman" Height="160" Width="800" MinWidth="800" MinHeight="160" MaxWidth="800" MaxHeight="160">
     <Window.Resources>
         <viewModel:SetNameCalculateWindowViewModel x:Key="ViewModel"></viewModel:SetNameCalculateWindowViewModel>
     </Window.Resources>

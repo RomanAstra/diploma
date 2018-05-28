@@ -1,7 +1,7 @@
 ﻿namespace Diploma.Helper
 {
 	/// <summary>
-	/// На вход подаём зашифрованный пароль, на выходе получаем пароль для email
+	/// На вход подаём зашифрованный пароль, на выходе получаем пароль
 	/// </summary>
 	public static class PasswordClass
 	{
