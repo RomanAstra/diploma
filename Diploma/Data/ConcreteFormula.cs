@@ -12,29 +12,29 @@ namespace Diploma.Data
 			//TODO временные данные, для теста
 			BrandConcreteList = new ObservableCollection<BrandConcrete>
 			{
-				new BrandConcrete {Name = "M100",Value = "100"},
-				new BrandConcrete {Name = "M150",Value = "150"},
-				new BrandConcrete {Name = "M200",Value = "200"},
-				new BrandConcrete {Name = "M250",Value = "250"},
-				new BrandConcrete {Name = "M300",Value = "300"},
-				new BrandConcrete {Name = "M350",Value = "350"},
-				new BrandConcrete {Name = "M400",Value = "400"},
-				new BrandConcrete {Name = "M450",Value = "450"},
-				new BrandConcrete {Name = "M500",Value = "500"},
-				new BrandConcrete {Name = "M550",Value = "550"},
-				new BrandConcrete {Name = "M600",Value = "600"}
+				new BrandConcrete {Name = "B7.5",Value = "98,2"},
+				new BrandConcrete {Name = "B10",Value = "131"},
+				new BrandConcrete {Name = "B12.5",Value = "163,7"},
+				new BrandConcrete {Name = "B15",Value = "196,5"},
+				new BrandConcrete {Name = "B20",Value = "261,9"},
+				new BrandConcrete {Name = "B22.5",Value = "294,4"},
+				new BrandConcrete {Name = "B25",Value = "327,4"},
+				new BrandConcrete {Name = "B30",Value = "392,9"},
+				new BrandConcrete {Name = "B35",Value = "458,4"},
+				new BrandConcrete {Name = "B40",Value = "523,9"},
+				new BrandConcrete {Name = "B45",Value = "589,4"}
 			};
 
 			CoarseAggregateList = new ObservableCollection<CoarseAggregate>
 			{
-				new CoarseAggregate {Name = "Щебень|10mm",Value = "4"},
-				new CoarseAggregate {Name = "Щебень|20mm",Value = "5"},
-				new CoarseAggregate {Name = "Щебень|40mm",Value = "6"},
-				new CoarseAggregate {Name = "Щебень|70mm",Value = "7"},
 				new CoarseAggregate {Name = "Гравий|10mm",Value = "0"},
 				new CoarseAggregate {Name = "Гравий|20mm",Value = "1"},
 				new CoarseAggregate {Name = "Гравий|40mm",Value = "2"},
 				new CoarseAggregate {Name = "Гравий|70mm",Value = "3"},
+				new CoarseAggregate {Name = "Щебень|10mm",Value = "0"},
+				new CoarseAggregate {Name = "Щебень|20mm",Value = "1"},
+				new CoarseAggregate {Name = "Щебень|40mm",Value = "2"},
+				new CoarseAggregate {Name = "Щебень|70mm",Value = "3"},
 			};
 
 			FineAggregateList = new ObservableCollection<FineAggregate>
@@ -70,6 +70,20 @@ namespace Diploma.Data
 				new Admixtures { Name="MasterGlenium 116W" },
 				new Admixtures { Name="MasterGlenium 806 PAV" },
 			};
+
+			BrandConcreteFrostResistancesList = new ObservableCollection<BrandConcreteFrostResistance>
+			{
+				new BrandConcreteFrostResistance { Name="F100", Value = "0"},
+				new BrandConcreteFrostResistance { Name="F150", Value = "1" },
+				new BrandConcreteFrostResistance { Name="F200" , Value = "2"},
+				new BrandConcreteFrostResistance { Name="F300", Value = "3" },
+			};
+
+			HardeningConditionsesList = new ObservableCollection<HardeningConditions>
+			{
+				new HardeningConditions { Name="Естественные условия", Value = "0"},
+				new HardeningConditions { Name="Тепловая обработка", Value = "1" },
+			};
 		}
 
 		public ObservableCollection<BrandConcrete> BrandConcreteList { get; set; }
@@ -78,5 +92,7 @@ namespace Diploma.Data
         public ObservableCollection<CementBrand> CementBrandList { get; set; }
         public ObservableCollection<MixtureMobility> MixtureMobilityList { get; set; }
         public ObservableCollection<Admixtures> AdmixturesList { get; set; }
+        public ObservableCollection<BrandConcreteFrostResistance> BrandConcreteFrostResistancesList { get; set; }
+        public ObservableCollection<HardeningConditions> HardeningConditionsesList { get; set; }
     }
 }

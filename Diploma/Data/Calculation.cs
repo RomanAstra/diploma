@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Diploma.Data
 {
@@ -14,23 +16,42 @@ namespace Diploma.Data
 		public CoarseAggregate CoarseAggregate { get; set; }
 		public FineAggregate FineAggregate { get; set; }
 		public MixtureMobility MixtureMobility { get; set; }
+		public BrandConcreteFrostResistance BrandConcreteFrostResistance { get; set; }
+		public HardeningConditions HardeningConditions { get; set; }
+		public CalculationResult CalculationResult;
 
-        private double[,] _consWater = new double[,]
-        {
-            {150,135,125,120,160,150,135,130},
-            {160,145,130,125,170,160,145,140},
-            {165,150,135,130,175,165,150,145},
-            {175,160,145,140,185,175,160,155},
-            {190,175,160,155,200,190,175,170},
-            {200,185,170,165,210,200,185,180},
-            {205,190,175,170,215,205,190,185},
-            {215,205,190,180,225,215,200,190},
-            {220,210,197,185,230,220,207,195},
-            {227,218,203,192,237,228,213,202},
-        };
+		//private double[,] _consWater = new double[,]
+		//{
+		//    {150,135,125,120,160,150,135,130},
+		//    {160,145,130,125,170,160,145,140},
+		//    {165,150,135,130,175,165,150,145},
+		//    {175,160,145,140,185,175,160,155},
+		//    {190,175,160,155,200,190,175,170},
+		//    {200,185,170,165,210,200,185,180},
+		//    {205,190,175,170,215,205,190,185},
+		//    {215,205,190,180,225,215,200,190},
+		//    {220,210,197,185,230,220,207,195},
+		//    {227,218,203,192,237,228,213,202},
+		//};
 
-        //TODO пока не используется, нужны для более точного расчёта песка и щебня, пока по умолчанию - 1.1
-        private double[,] _spreadingFactor = new double[,]
+		private double[,] _consWater = new double[,]
+		{
+			{190,200},
+			{165,175},
+			{145,160},
+			{140,150}
+		};
+
+		private double[,] _frostHardening = new double[,]
+		{
+			{0.6,0.55},
+			{0.57,0.52},
+			{0.55,0.5},
+			{0.47,0.45}
+		};
+
+		//TODO пока не используется, нужны для более точного расчёта песка и щебня, пока по умолчанию - 1.1
+		private double[,] _spreadingFactor = new double[,]
         {
             {0,0,0,1.26,1.32,1.38},
             {0,0,1.3,1.36,1.42,0},
@@ -79,12 +100,24 @@ namespace Diploma.Data
 
 		private void CalcWaterAndCementValues()
 		{
-			CalcWnC();
-			if (!Int32.TryParse(MixtureMobility.Value, out var mixtureMobility)) throw new Exception($"Плохое значение {mixtureMobility}");
-			if (!Int32.TryParse(CoarseAggregate.Value, out var coarseAggregate)) throw new Exception($"Плохое значение {coarseAggregate}");
-            if (!Int32.TryParse(FineAggregate.Value, out var fineAggregate)) throw new Exception($"Плохое значение {fineAggregate}");
-            WaterValue = _consWater[mixtureMobility, coarseAggregate] + fineAggregate;
-			CementValue = WaterValue / WnC;
+			int column;
+			column = CoarseAggregate.Name.Contains("Гравий") ? 0 : 1;
+			if (!Int32.TryParse(CoarseAggregate.Value, out var result)) return;
+			CalculationResult.WaterFlowAccordingDirections = _consWater[result, column];
+			
+			CalculationResult.WaterConsumptionIncludingOK = CalculationResult.WaterFlowAccordingDirections + (12 - 5) * 3;
+			CalculationResult.WaterFlowWithRegardToAirContent = CalculationResult.WaterConsumptionIncludingOK - (4-2) * 3;
+			if (!Single.TryParse(BrandConcrete.Value, out var brandConcrete)) return;
+			if (!Double.TryParse(CementBrand.Value, out var cementBrand)) return;
+			CalculationResult.QuantityOfCementByCalculation = (((brandConcrete/(0.55 * cementBrand))+0.5)*(CalculationResult.WaterFlowWithRegardToAirContent + 10 * 4)) - 22;
+			CalculationResult.WCByCalculation = CalculationResult.WaterFlowWithRegardToAirContent/CalculationResult.QuantityOfCementByCalculation;
+
+			if (!Int32.TryParse(BrandConcreteFrostResistance.Value, out var rowFrostHardening)) return;
+			if (!Int32.TryParse(HardeningConditions.Value, out var columnFrostHardening)) return;
+			CalculationResult.MaximumPermissibleAccordingWCToInstructions = _frostHardening[rowFrostHardening, columnFrostHardening];
+			
+			var minWC =  new List<Double>(){ CalculationResult.MaximumPermissibleAccordingWCToInstructions, CalculationResult.WCByCalculation }.Min();
+			//CalculationResult.WaterConsumptionWithRegardToHumidityOfSand = CalculationResult.WaterFlowWithRegardToAirContent - (4-2);
 		}
 
         private void CalcGravelAndSand()
@@ -96,9 +129,7 @@ namespace Diploma.Data
 
         public void StartCalculations()
         {
-            CalcWnC();
             CalcWaterAndCementValues();
-            CalcGravelAndSand();
         }
     }
 }

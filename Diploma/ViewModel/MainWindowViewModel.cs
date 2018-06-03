@@ -21,9 +21,11 @@ namespace Diploma.ViewModel
 	        {
 		        Admixtures = ConcreteFormula?.AdmixturesList[0],
 		        BrandConcrete = ConcreteFormula?.BrandConcreteList[0],
+		        BrandConcreteFrostResistance = ConcreteFormula?.BrandConcreteFrostResistancesList[0],
 		        CementBrand = ConcreteFormula?.CementBrandList[0],
 		        CoarseAggregate = ConcreteFormula?.CoarseAggregateList[0],
 		        FineAggregate = ConcreteFormula?.FineAggregateList[0],
+		        HardeningConditions = ConcreteFormula?.HardeningConditionsesList[0],
 		        MixtureMobility = ConcreteFormula?.MixtureMobilityList[0]
 	        };
 			
@@ -95,7 +97,18 @@ namespace Diploma.ViewModel
 				Calc();
 			}
 		}
-		
+
+		public HardeningConditions HardeningConditions
+		{
+			get => Calculation.HardeningConditions;
+			set
+			{
+				Calculation.HardeningConditions = value;
+				OnPropertyChanged(nameof(HardeningConditions));
+				Calc();
+			}
+		}
+
 		public CoarseAggregate CoarseAggregate
 		{
 			get => Calculation.CoarseAggregate;
@@ -125,6 +138,17 @@ namespace Diploma.ViewModel
 			{
 				Calculation.MixtureMobility = value;
 				OnPropertyChanged(nameof(MixtureMobility));
+				Calc();
+			}
+		}
+
+		public BrandConcreteFrostResistance BrandConcreteFrostResistance
+		{
+			get => Calculation.BrandConcreteFrostResistance;
+			set
+			{
+				Calculation.BrandConcreteFrostResistance = value;
+				OnPropertyChanged(nameof(BrandConcreteFrostResistance));
 				Calc();
 			}
 		}
@@ -353,8 +377,8 @@ namespace Diploma.ViewModel
 		/// <param name="calculation"></param>
 		public void SetCalculation(Calculation calculation)
 		{
-			//Calculation = calculation;
-			CementBrand.Name = calculation.CementBrand.Name;
+			Calculation = calculation;
+			//MessageBox.Show(CementBrand.Name);
 		}
 
 		/// <summary>
@@ -386,7 +410,7 @@ namespace Diploma.ViewModel
 
 		private void Calc()
 		{
-			//Calculation.StartCalculations();
+			Calculation.StartCalculations();
 			//MessageBoxWindow messageBoxWindow = new MessageBoxWindow($" В/Ц = {Calculation.WnC}\n Вода = {Calculation.WaterValue}\n " +
 			//                                                         $"Цемент = {Calculation.CementValue}\n Крупный заполнитель = {Calculation.GravelValue}\n Песок = { Calculation.SandValue }\n");
 			//messageBoxWindow.ShowDialog();

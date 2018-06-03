@@ -73,12 +73,15 @@
     </ApplicationDefinition>
     <Compile Include="Data\Admixtures.cs" />
     <Compile Include="Data\BrandConcrete.cs" />
+    <Compile Include="Data\BrandConcreteFrostResistance.cs" />
     <Compile Include="Data\CalculationListRepositoty.cs" />
+    <Compile Include="Data\CalculationResult.cs" />
     <Compile Include="Data\CementBrand.cs" />
     <Compile Include="Data\CoarseAggregate.cs" />
     <Compile Include="Data\ConcreteFormula.cs" />
     <Compile Include="Data\ConcreteFormulaRepositoty.cs" />
     <Compile Include="Data\FineAggregate.cs" />
+    <Compile Include="Data\HardeningConditions.cs" />
     <Compile Include="Data\ICompositions.cs" />
     <Compile Include="Data\MixtureMobility.cs" />
     <Compile Include="Data\Calculation.cs" />
