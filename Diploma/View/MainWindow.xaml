@@ -8,7 +8,7 @@
         xmlns:viewModel="clr-namespace:Diploma.ViewModel"
         mc:Ignorable="d"
         Title="Главное окно" Height="450" Width="800"
-        Background="#333" ResizeMode="CanResizeWithGrip" WindowState="Maximized" FontFamily="Times New Roman" MinWidth="800" MaxWidth="800" MinHeight="450" MaxHeight="450">
+        Background="#333"  ResizeMode="CanResizeWithGrip" WindowState="Maximized" FontFamily="Times New Roman" MinWidth="800" MaxWidth="800" MinHeight="450" MaxHeight="450">
     <Window.Resources>
         <viewModel:MainWindowViewModel x:Key="ViewModel"></viewModel:MainWindowViewModel>
     </Window.Resources>
@@ -50,34 +50,42 @@
 :" Foreground="White" Height="28"  Margin="5"></Label>
                         </StackPanel>
                         <StackPanel Grid.Column="1" Grid.Row="0">
-                            <TextBox Text="{Binding ConcreteFormula, UpdateSourceTrigger=PropertyChanged}" Margin="5" Height="28" Width="180"></TextBox>
+                            <TextBox Text="{Binding CountConcrete, UpdateSourceTrigger=PropertyChanged}" 
+                                     
+                                     Margin="5" Height="28" Width="180"></TextBox>
                             <ComboBox ItemsSource="{Binding ConcreteFormula.BrandConcreteList}"
                                       DisplayMemberPath="Name"
-                                      SelectedValue="{Binding Path=Calculation.BrandConcrete}"
+                                      SelectedValue="{Binding Path=BrandConcrete}"
                                       Margin="5" Width="180"/>
                             <ComboBox ItemsSource="{Binding ConcreteFormula.CoarseAggregateList, UpdateSourceTrigger=PropertyChanged}"
                                   DisplayMemberPath="Name"
-                                  SelectedValue="{Binding Path=Calculation.CoarseAggregate}"
+                                  SelectedValue="{Binding Path=CoarseAggregate}"
                                   Margin="5" Width="180"/>
                             <ComboBox ItemsSource="{Binding ConcreteFormula.FineAggregateList, UpdateSourceTrigger=PropertyChanged}"
                                   DisplayMemberPath="Name"
-                                      SelectedValue="{Binding Path=Calculation.FineAggregate}" 
+                                      SelectedValue="{Binding Path=FineAggregate}" 
                                   Margin="5" Width="180"/>
                             <ComboBox ItemsSource="{Binding ConcreteFormula.CementBrandList, UpdateSourceTrigger=PropertyChanged}"
                                   DisplayMemberPath="Name"
-                                  SelectedValue="{Binding Path=Calculation.CementBrand}" 
+                                  SelectedValue="{Binding Path=CementBrand}" 
                                   Margin="5" Width="180"/>
                             <ComboBox ItemsSource="{Binding ConcreteFormula.MixtureMobilityList, UpdateSourceTrigger=PropertyChanged}"
                                   DisplayMemberPath="Name"
-                                  SelectedValue="{Binding Path=Calculation.MixtureMobility}"
+                                  SelectedValue="{Binding Path=MixtureMobility}"
                                   Margin="5" Width="180"/>
                             <ComboBox ItemsSource="{Binding ConcreteFormula.AdmixturesList, UpdateSourceTrigger=PropertyChanged}"
                                   DisplayMemberPath="Name"
-                                      SelectedValue="{Binding Path=Calculation.Admixtures}"
+                                      SelectedValue="{Binding Path=Admixtures}"
                                   Margin="5" Width="180"/>
                             <Button Content="Подсчитать" Command="{Binding Calculate}" Width="180"></Button>
                         </StackPanel>
                     </Grid>
+                </TabItem>
+                <TabItem Header="Вывод расчета">
+                    <StackPanel>
+                        <RichTextBox></RichTextBox>
+                        <Button Command="{Binding Export}" Content="Сформировать документ" Height="30"></Button>
+                    </StackPanel>
                 </TabItem>
                 <TabItem Header="Дополнительный материал">
                     <!--<StackPanel Orientation="Vertical">
@@ -104,12 +112,6 @@
                             <Rectangle Width="80" Height="80" Fill="Orange" Margin="4"/>
                         </StackPanel>
                     </ScrollViewer>
-                </TabItem>
-                <TabItem Header="Вывод расчета" IsEnabled="{Binding IsShowCalculation}">
-                    <StackPanel>
-                        <RichTextBox></RichTextBox>
-                        <Button Command="{Binding Export}" Content="Сформировать документ" Height="30"></Button>
-                    </StackPanel>
                 </TabItem>
             </TabControl>
         </StackPanel>

@@ -7,6 +7,7 @@ namespace Diploma.Data
 	{
 		public string Name { get; set; }
 		public DateTime DateTime { get; set; }
+		public float CountConcrete { get; set; } = 1;
 		public Admixtures Admixtures { get; set; }
 		public BrandConcrete BrandConcrete { get; set; }
 		public CementBrand CementBrand { get; set; }

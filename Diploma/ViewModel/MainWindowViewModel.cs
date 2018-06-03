@@ -14,16 +14,6 @@ namespace Diploma.ViewModel
 		public static MainWindowViewModel Instance { get; private set; }
 		private string _nameCalculate;
 
-		private bool _isShowCalculation;
-		public bool IsShowCalculation
-		{
-			get => _isShowCalculation;
-			set
-			{
-				_isShowCalculation = value;
-				OnPropertyChanged(nameof(IsShowCalculation));
-			}
-		}
 		public MainWindowViewModel()
 		{
 			Instance = this;
@@ -58,6 +48,84 @@ namespace Diploma.ViewModel
 			{
 				_calculation = value;
 				OnPropertyChanged(nameof(Calculation));
+				Calc();
+			}
+		}
+
+		public float CountConcrete
+		{
+			get => Calculation.CountConcrete;
+			set
+			{
+				Calculation.CountConcrete = value;
+				OnPropertyChanged(nameof(CountConcrete));
+				Calc();
+			}
+		}
+
+		public Admixtures Admixtures
+		{
+			get => Calculation.Admixtures;
+			set
+			{
+				Calculation.Admixtures = value;
+				OnPropertyChanged(nameof(Admixtures));
+				Calc();
+			}
+		}
+		
+		public BrandConcrete BrandConcrete
+		{
+			get => Calculation.BrandConcrete;
+			set
+			{
+				Calculation.BrandConcrete = value;
+				OnPropertyChanged(nameof(BrandConcrete));
+				Calc();
+			}
+		}
+		
+		public CementBrand CementBrand
+		{
+			get => Calculation.CementBrand;
+			set
+			{
+				Calculation.CementBrand = value;
+				OnPropertyChanged(nameof(CementBrand));
+				Calc();
+			}
+		}
+		
+		public CoarseAggregate CoarseAggregate
+		{
+			get => Calculation.CoarseAggregate;
+			set
+			{
+				Calculation.CoarseAggregate = value;
+				OnPropertyChanged(nameof(CoarseAggregate));
+				Calc();
+			}
+		}
+		
+		public FineAggregate FineAggregate
+		{
+			get => Calculation.FineAggregate;
+			set
+			{
+				Calculation.FineAggregate = value;
+				OnPropertyChanged(nameof(FineAggregate));
+				Calc();
+			}
+		}
+		
+		public MixtureMobility MixtureMobility
+		{
+			get => Calculation.MixtureMobility;
+			set
+			{
+				Calculation.MixtureMobility = value;
+				OnPropertyChanged(nameof(MixtureMobility));
+				Calc();
 			}
 		}
 
@@ -75,11 +143,7 @@ namespace Diploma.ViewModel
 		{
 			try
 			{
-                Calculation.StartCalculations();
-				MessageBoxWindow messageBoxWindow = new MessageBoxWindow($" В/Ц = {Calculation.WnC}\n Вода = {Calculation.WaterValue}\n " +
-                    $"Цемент = {Calculation.CementValue}\n Крупный заполнитель = {Calculation.GravelValue}\n Песок = { Calculation.SandValue }\n");
-				messageBoxWindow.ShowDialog();
-				IsShowCalculation = true;
+				//IsShowCalculation = true;
 			}
 			catch (Exception e)
 			{
@@ -115,7 +179,7 @@ namespace Diploma.ViewModel
 					FineAggregate = ConcreteFormula?.FineAggregateList[0],
 					MixtureMobility = ConcreteFormula?.MixtureMobilityList[0]
 				};
-				IsShowCalculation = false;
+				//IsShowCalculation = false;
 			}
 			catch (Exception e)
 			{
@@ -139,6 +203,7 @@ namespace Diploma.ViewModel
 			{
 				OpenCalculationsWindow openCalculationsWindow = new OpenCalculationsWindow();
 				openCalculationsWindow.ShowDialog();
+				CementBrand = Calculation.CementBrand;
 			}
 			catch (Exception e)
 			{
@@ -288,7 +353,8 @@ namespace Diploma.ViewModel
 		/// <param name="calculation"></param>
 		public void SetCalculation(Calculation calculation)
 		{
-			Calculation = calculation;
+			//Calculation = calculation;
+			CementBrand.Name = calculation.CementBrand.Name;
 		}
 
 		/// <summary>
@@ -318,7 +384,15 @@ namespace Diploma.ViewModel
 			}
 		}
 
-        protected override void OnDispose()
+		private void Calc()
+		{
+			//Calculation.StartCalculations();
+			//MessageBoxWindow messageBoxWindow = new MessageBoxWindow($" В/Ц = {Calculation.WnC}\n Вода = {Calculation.WaterValue}\n " +
+			//                                                         $"Цемент = {Calculation.CementValue}\n Крупный заполнитель = {Calculation.GravelValue}\n Песок = { Calculation.SandValue }\n");
+			//messageBoxWindow.ShowDialog();
+		}
+
+		protected override void OnDispose()
 		{
 			// Очистка ресурсов
 		}
