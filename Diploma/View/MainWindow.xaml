@@ -99,7 +99,7 @@
 
                             </FlowDocument>
                         </RichTextBox>
-                        <Button Command="{Binding Export}" Content="Сформировать документ" Height="30"></Button>
+                        <Button Click="ButtonExport_OnClick" Command="{Binding Export}" Content="Сформировать документ" Height="30"></Button>
                     </StackPanel>
                 </TabItem>
                 <TabItem Header="Дополнительный материал">

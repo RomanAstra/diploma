@@ -326,8 +326,7 @@ namespace Diploma.ViewModel
 		{
 			try
 			{
-				var export = new WordExport();
-				export.Export();
+				
 
 			}
 			catch (Exception e)

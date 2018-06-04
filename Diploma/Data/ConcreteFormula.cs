@@ -54,21 +54,17 @@ namespace Diploma.Data
 
 			MixtureMobilityList = new ObservableCollection<MixtureMobility>
 			{
-				new MixtureMobility {Name = "Ж4", Value = "0"},
-				new MixtureMobility {Name = "Ж3", Value = "1"},
-				new MixtureMobility {Name = "Ж2", Value = "2"},
-				new MixtureMobility {Name = "Ж1", Value = "3"},
-				new MixtureMobility {Name = "П1", Value = "4"},
-				new MixtureMobility {Name = "П2", Value = "5"},
-				new MixtureMobility {Name = "П3", Value = "6"},
-				new MixtureMobility {Name = "П4", Value = "7"},
+				new MixtureMobility {Name = "П1", Value = "2,5"},
+				new MixtureMobility {Name = "П2", Value = "7"},
+				new MixtureMobility {Name = "П3", Value = "12"},
+				new MixtureMobility {Name = "П4", Value = "16"},
 			};
 
 			AdmixturesList = new ObservableCollection<Admixtures>
 			{
-				new Admixtures { Name="MasterGlenium 101" },
-				new Admixtures { Name="MasterGlenium 116W" },
-				new Admixtures { Name="MasterGlenium 806 PAV" },
+				new Admixtures { Name="MasterGlenium 101", Value = "0,4"},
+				new Admixtures { Name="MasterGlenium 116W", Value = "0,5" },
+				new Admixtures { Name="MasterGlenium 806 PAV", Value = "0,6" },
 			};
 
 			BrandConcreteFrostResistancesList = new ObservableCollection<BrandConcreteFrostResistance>
