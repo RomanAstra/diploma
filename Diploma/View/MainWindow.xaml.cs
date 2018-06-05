@@ -2,6 +2,8 @@
 using System.Windows.Documents;
 using Diploma.Export;
 using Diploma.ViewModel;
+using System.Net;
+using System.IO;
 
 namespace Diploma
 {
@@ -108,5 +110,54 @@ namespace Diploma
 			//var export = new WordExport();
 			//export.Export();
 		}
-	}
+
+        private void SendCalculationsButton_Click(object sender, RoutedEventArgs e)
+        {
+            var calculationResult = MainWindowViewModel.Instance.Calculation.CalculationResult;
+            var result = "-1";
+            var fcmServerAddress = "https://fcm.googleapis.com/fcm/send";
+            var serverKey = "AAAA4LGhV78:APA91bFcC8w3KlsYsW6GDR0Sp9B1CuGuS3HBnUjL5qrIY3_FWNGEL1J_8qy3sDZHXq9BfqPoRNtFEMtCtD_8LN6yS6DgIqxqvY9TO7UyRK62dMFoME8NK2b3yULCk3N_VSB3inqhJ_wv";
+
+            var httpWebRequest = (HttpWebRequest)WebRequest.Create(fcmServerAddress);
+            httpWebRequest.ContentType = "application/json";
+            httpWebRequest.Headers.Add(HttpRequestHeader.Authorization, "key=" + serverKey);
+            httpWebRequest.Method = "POST";
+            using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+            {
+                string notificationJsonBody = @"{""to"": ""/topics/CalculationsResults"",";
+                //notificationJsonBody += @"""notification"": {";
+                //notificationJsonBody += @"""title"": """ + "Расчёты выполнены для:" + @""",";
+                //notificationJsonBody += @"""text"": """ + MainWindowViewModel.Instance.Calculation.CountConcrete.ToString()
+                //    + " куб.м. бетона марки " + MainWindowViewModel.Instance.BrandConcrete.Name + @""",";
+                //notificationJsonBody += @"""sound"": ""default""},";
+                notificationJsonBody += @"""data"": {";
+
+                notificationJsonBody += @"""Title"": """ + "Расчёты выполнены для:" + @""",";
+                notificationJsonBody += @"""Text"": """ + MainWindowViewModel.Instance.Calculation.CountConcrete.ToString()
+                    + " куб.м. бетона марки " + MainWindowViewModel.Instance.BrandConcrete.Name + @""",";
+
+                notificationJsonBody += @"""CountConcrete"": """ + MainWindowViewModel.Instance.Calculation.CountConcrete.ToString() + @""",";
+                notificationJsonBody += @"""BrandConcrete"": """ + MainWindowViewModel.Instance.BrandConcrete.Name + @""",";
+                notificationJsonBody += @"""CementBrand"": """ + MainWindowViewModel.Instance.CementBrand.Name + @""",";
+                notificationJsonBody += @"""CoarseAggregate"": """ + MainWindowViewModel.Instance.CoarseAggregate.Name + @""",";
+                notificationJsonBody += @"""FineAggregate"": """ + MainWindowViewModel.Instance.FineAggregate.Name + @""",";
+                notificationJsonBody += @"""Admixture"": """ + MainWindowViewModel.Instance.Admixtures.Name + @""",";
+
+                notificationJsonBody += @"""CementValue"": """ + calculationResult.CorrectedCementConsumption.ToString() + @""",";
+                notificationJsonBody += @"""WaterValue"": """ + calculationResult.WaterFlowWithRegardToAirContent.ToString() + @""",";
+                notificationJsonBody += @"""SandValue"": """ + calculationResult.TheAmountOfSandDry.ToString() + @""",";
+                notificationJsonBody += @"""CoarseAggregateValue"": """ + calculationResult.NumberOfCoarseAggregate.ToString() + @""",";
+                notificationJsonBody += @"""ChemicalAdditiveValue"": """ + calculationResult.ChemicalAdditive + @"""}}";
+
+                streamWriter.Write(notificationJsonBody);
+                streamWriter.Flush();
+            }
+
+            var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+            using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+            {
+                result = streamReader.ReadToEnd();
+            }
+        }
+    }
 }
