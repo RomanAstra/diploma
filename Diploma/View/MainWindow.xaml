@@ -92,7 +92,6 @@
                                   DisplayMemberPath="Name"
                                       SelectedValue="{Binding Path=Admixtures}"
                                   Margin="5" Width="180"/>
-                            <Button Click="ButtonBase_OnClick" Content="Подсчитать" Command="{Binding Calculate}" Width="180"></Button>
                         </StackPanel>
                     </Grid>
                 </TabItem>

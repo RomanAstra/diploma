@@ -15,9 +15,10 @@ namespace Diploma
 		public MainWindow()
 		{
 			InitializeComponent();
+			MainWindowViewModel.Instance.CalculationEvent += Calc;
 		}
 
-		private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+		private void Calc(object sender, System.EventArgs eventArgs)
 		{
 			MainRichTextBox.Document.Blocks.Clear();
 			var calculationResult = MainWindowViewModel.Instance.Calculation.CalculationResult;
