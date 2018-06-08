@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Windows.Media;
+using Diploma.Data;
 using Xceed.Words.NET;
 
 namespace Diploma.Export
@@ -33,7 +34,7 @@ namespace Diploma.Export
 			}
 		}
 
-		public void Export()
+		public void Export(CalculationResult result)
 		{
 			using (DocX document = DocX.Load(_filename))
 			{
@@ -45,16 +46,89 @@ namespace Diploma.Export
 				_document.MarginBottom = 28.3f;
 				AddTitle("Отчет по результатам произведенных расчетов.");
 
-				AddDetails();
+				AddDetails(result);
 				document.Save();
 			}
 		}
 
-		private void AddDetails()
+		private void AddDetails(CalculationResult result)
 		{
 			Paragraph details = CreateParagraph();
+			
+			var value = $@"Полученный расход воды по Указаниям: {result.WaterFlowAccordingDirections} л.";
+			AddTextLineToParagraph(details, value);
 
-			AddTextLineToParagraph(details, "Test: ");
+			value = $@"Расход воды с учетом ОК: {result.WaterConsumptionIncludingOK} л.";
+			AddTextLineToParagraph(details, value);
+
+			value = $@"Расход воды с учетом Воздухосодержания: {result.WaterFlowWithRegardToAirContent} л.";
+			AddTextLineToParagraph(details, value);
+
+			value = $@"Расход воды с учетом влажности песка: {result.WaterConsumptionWithRegardToHumidityOfSand} л.";
+			AddTextLineToParagraph(details, value);
+
+			value = $@"Количество цемента по расчету: {result.QuantityOfCementByCalculation} кг.";
+			AddTextLineToParagraph(details, value);
+
+			value = $@"Полученное В/Ц из расчета: {result.WCByCalculation}";
+			AddTextLineToParagraph(details, value);
+
+			value = $@"Максимально допустимое В/Ц по Указаниям: {result.MaximumPermissibleAccordingWCToInstructions}";
+			AddTextLineToParagraph(details, value);
+
+			value = $@"В/Ц принимается минимальное из полученного и допустимого: {result.MinimumOfTheReceivedAndAdmissible}";
+			AddTextLineToParagraph(details, value);
+
+			value = $@"Откорректированный расход цемента: {result.CorrectedCementConsumption} кг.";
+			AddTextLineToParagraph(details, value);
+
+			value = $@"Объем заполнителей: {result.VolumeOfAggregates} кг.";
+			AddTextLineToParagraph(details, value);
+
+			value = $@"Доля песка от общего кол-ва заполнит: {result.TheShareOfSandFromTheTotalNumberWillFill} %";
+			AddTextLineToParagraph(details, value);
+
+			value = $@"Доля песка откорректированная  по Мк и В/Ц: {result.TheProportionOfSandCorrectedByMk} %";
+			AddTextLineToParagraph(details, value);
+
+			value = $@"Доля песка откорректированная по крупному заполнителю: {result.ShareOfSandCorrectedForGravel} %";
+			AddTextLineToParagraph(details, value);
+
+			value = $@"Количество песка(сухого): {result.TheAmountOfSandDry} кг.";
+			AddTextLineToParagraph(details, value);
+
+			value = $@"Количество песка(влажного): {result.TheAmountOfSandWet} кг.";
+			AddTextLineToParagraph(details, value);
+
+			value = $@"Количество крупного заполнителя: {result.NumberOfCoarseAggregate} кг.";
+			AddTextLineToParagraph(details, value);
+
+			value = $@"Химическая добавка: {result.ChemicalAdditive} кг.";
+			AddTextLineToParagraph(details, value);
+
+			value = $@"В пересчете на 20% раствор: {result.InTermsOfSolution} л.";
+			AddTextLineToParagraph(details, value);
+
+			//value = $@"++++++++++++++++++++++++++++++++++++++++++++++++++++";
+			//AddParagraph(value);
+
+			//value = $@"Расчетный состав для {MainWindowViewModel.Instance.Calculation.CountConcrete}";
+			//AddParagraph(value);
+
+			//value = $@"Цемент = {calculationResult.CorrectedCementConsumption * MainWindowViewModel.Instance.Calculation.CountConcrete}";
+			//AddParagraph(value);
+
+			//value = $@"Вода = {calculationResult.WaterFlowWithRegardToAirContent * MainWindowViewModel.Instance.Calculation.CountConcrete}";
+			//AddParagraph(value);
+
+			//value = $@"Песок = {calculationResult.TheAmountOfSandDry * MainWindowViewModel.Instance.Calculation.CountConcrete}";
+			//AddParagraph(value);
+
+			//value = $@"Крупный заполнитель = {calculationResult.NumberOfCoarseAggregate * MainWindowViewModel.Instance.Calculation.CountConcrete}";
+			//AddParagraph(value);
+
+			//value = $@"Химическая добавка { MainWindowViewModel.Instance.Calculation.Admixtures.Name} {MainWindowViewModel.Instance.Calculation.Admixtures.Value} % от массы цемента = {calculationResult.ChemicalAdditive * MainWindowViewModel.Instance.Calculation.CountConcrete}";
+			//AddParagraph(value);
 		}
 
 		private void PageBreak()

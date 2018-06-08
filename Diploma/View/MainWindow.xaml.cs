@@ -108,8 +108,8 @@ namespace Diploma
 
 		private void ButtonExport_OnClick(object sender, RoutedEventArgs e)
 		{
-			//var export = new WordExport();
-			//export.Export();
+			var export = new WordExport();
+			export.Export(MainWindowViewModel.Instance.Calculation.CalculationResult);
 		}
 
         private void SendCalculationsButton_Click(object sender, RoutedEventArgs e)
