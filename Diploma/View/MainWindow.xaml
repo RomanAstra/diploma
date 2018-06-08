@@ -95,7 +95,7 @@
                         </StackPanel>
                     </Grid>
                 </TabItem>
-                <TabItem Header="Вывод расчета">
+                <TabItem IsEnabled="{Binding IsActiveCalculation}" Header="Вывод расчета">
                     <StackPanel>
                         <RichTextBox Height="350" Name="MainRichTextBox" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
                             <FlowDocument >

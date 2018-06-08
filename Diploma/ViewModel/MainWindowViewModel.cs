@@ -14,6 +14,16 @@ namespace Diploma.ViewModel
 		public static MainWindowViewModel Instance { get; private set; }
 		private string _nameCalculate;
 		public event EventHandler CalculationEvent;
+		private bool _isActiveCalculation;
+		public bool IsActiveCalculation
+		{
+			get => _isActiveCalculation;
+			set
+			{
+				_isActiveCalculation = value;
+				OnPropertyChanged(nameof(IsActiveCalculation));
+			}
+		}
 
 		public MainWindowViewModel()
 		{
@@ -29,7 +39,7 @@ namespace Diploma.ViewModel
 		        HardeningConditions = ConcreteFormula?.HardeningConditionsesList[0],
 		        MixtureMobility = ConcreteFormula?.MixtureMobilityList[0]
 	        };
-			
+			IsActiveCalculation = false;
 		}
 
         private ConcreteFormula _concreteFormula;
@@ -52,7 +62,6 @@ namespace Diploma.ViewModel
 				_calculation = value;
 				OnPropertyChanged(nameof(Calculation));
 				Calc();
-				CalculationEvent?.Invoke(this, EventArgs.Empty);
 			}
 		}
 
@@ -65,7 +74,6 @@ namespace Diploma.ViewModel
 				Calculation.CountConcrete = value;
 				OnPropertyChanged(nameof(CountConcrete));
 				Calc();
-				CalculationEvent?.Invoke(this, EventArgs.Empty);
 			}
 		}
 
@@ -77,7 +85,6 @@ namespace Diploma.ViewModel
 				Calculation.Admixtures = value;
 				OnPropertyChanged(nameof(Admixtures));
 				Calc();
-				CalculationEvent?.Invoke(this, EventArgs.Empty);
 			}
 		}
 		
@@ -89,7 +96,6 @@ namespace Diploma.ViewModel
 				Calculation.BrandConcrete = value;
 				OnPropertyChanged(nameof(BrandConcrete));
 				Calc();
-				CalculationEvent?.Invoke(this, EventArgs.Empty);
 			}
 		}
 		
@@ -101,7 +107,6 @@ namespace Diploma.ViewModel
 				Calculation.CementBrand = value;
 				OnPropertyChanged(nameof(CementBrand));
 				Calc();
-				CalculationEvent?.Invoke(this, EventArgs.Empty);
 			}
 		}
 
@@ -113,7 +118,6 @@ namespace Diploma.ViewModel
 				Calculation.HardeningConditions = value;
 				OnPropertyChanged(nameof(HardeningConditions));
 				Calc();
-				CalculationEvent?.Invoke(this, EventArgs.Empty);
 			}
 		}
 
@@ -125,7 +129,6 @@ namespace Diploma.ViewModel
 				Calculation.CoarseAggregate = value;
 				OnPropertyChanged(nameof(CoarseAggregate));
 				Calc();
-				CalculationEvent?.Invoke(this, EventArgs.Empty);
 			}
 		}
 		
@@ -137,7 +140,6 @@ namespace Diploma.ViewModel
 				Calculation.FineAggregate = value;
 				OnPropertyChanged(nameof(FineAggregate));
 				Calc();
-				CalculationEvent?.Invoke(this, EventArgs.Empty);
 			}
 		}
 		
@@ -149,7 +151,6 @@ namespace Diploma.ViewModel
 				Calculation.MixtureMobility = value;
 				OnPropertyChanged(nameof(MixtureMobility));
 				Calc();
-				CalculationEvent?.Invoke(this, EventArgs.Empty);
 			}
 		}
 
@@ -161,7 +162,6 @@ namespace Diploma.ViewModel
 				Calculation.BrandConcreteFrostResistance = value;
 				OnPropertyChanged(nameof(BrandConcreteFrostResistance));
 				Calc();
-				CalculationEvent?.Invoke(this, EventArgs.Empty);
 			}
 		}
 
@@ -422,6 +422,8 @@ namespace Diploma.ViewModel
 		private void Calc()
 		{
 			Calculation.StartCalculations();
+			CalculationEvent?.Invoke(this, EventArgs.Empty);
+			IsActiveCalculation = true;
 			//MessageBoxWindow messageBoxWindow = new MessageBoxWindow($" В/Ц = {Calculation.WnC}\n Вода = {Calculation.WaterValue}\n " +
 			//                                                         $"Цемент = {Calculation.CementValue}\n Крупный заполнитель = {Calculation.GravelValue}\n Песок = { Calculation.SandValue }\n");
 			//messageBoxWindow.ShowDialog();

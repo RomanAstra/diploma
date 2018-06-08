@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Navigation;
 
 namespace Diploma.View
 {
@@ -73,14 +75,20 @@ namespace Diploma.View
 					foreach (var specificity in p.Specificity)
 					{
 						TreeViewItem item2 = new TreeViewItem { Header = specificity.Name };
-						item2.Items.Add(specificity.Description);
+						item2.MouseDoubleClick += (sender, args) => { Hyperlink_RequestNavigate(this, new RequestNavigateEventArgs(new Uri(specificity.Description), "Google"));};
+						
 						item.Items.Add(item2);
 					}
 					Root.Items.Add(item);
 				}
 	        }
         }
-    }
+	    private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
+	    {
+		    Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
+		    e.Handled = true;
+		}
+	}
 
 	[DataContract]
 	public class Theory
