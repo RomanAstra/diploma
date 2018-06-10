@@ -17,7 +17,7 @@ namespace Diploma.Helper
 			{
 				_admin = new Admin
 				{
-					Login = "Admin",
+					Login = "admin",
 					Password = "234"
 				};
 			}

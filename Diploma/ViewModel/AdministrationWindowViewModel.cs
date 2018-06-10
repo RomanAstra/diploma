@@ -362,39 +362,39 @@ namespace Diploma.ViewModel
 
 		#region Команда редактирования логина или пароля
 
-		private RelayCommand _editPasswordCommand;
+		//private RelayCommand _editPasswordCommand;
 
-		public ICommand EditPassword => _editPasswordCommand ?? (_editPasswordCommand =
-			                        new RelayCommand(ExecuteEditPasswordCommand, CanExecuteEditPasswordCommand));
+		//public ICommand EditPassword => _editPasswordCommand ?? (_editPasswordCommand =
+		//	                        new RelayCommand(ExecuteEditPasswordCommand, CanExecuteEditPasswordCommand));
 
-		public void ExecuteEditPasswordCommand(object parameter)
-		{
-			try
-			{
-				if (!String.IsNullOrWhiteSpace(Password))
-				{
-					VariablesClass.SetPassword(Password);
-					VariablesClass.SaveData();
-				}
-				if (!String.IsNullOrWhiteSpace(Logint))
-				{
-					VariablesClass.SetPassword(Logint);
-					VariablesClass.SaveData();
-				}
-				Password = String.Empty;
-				Logint = String.Empty;
-			}
-			catch (Exception e)
-			{
-				MessageBoxWindow messageBoxWindow = new MessageBoxWindow(e.Message);
-				messageBoxWindow.ShowDialog();
-			}
-		}
+		//public void ExecuteEditPasswordCommand(object parameter)
+		//{
+		//	try
+		//	{
+		//		if (!String.IsNullOrWhiteSpace(Password))
+		//		{
+		//			VariablesClass.SetPassword(Password);
+		//			VariablesClass.SaveData();
+		//		}
+		//		//if (!String.IsNullOrWhiteSpace(Logint))
+		//		//{
+		//		//	VariablesClass.SetPassword(Logint);
+		//		//	VariablesClass.SaveData();
+		//		//}
+		//		Password = String.Empty;
+		//		//Logint = String.Empty;
+		//	}
+		//	catch (Exception e)
+		//	{
+		//		MessageBoxWindow messageBoxWindow = new MessageBoxWindow(e.Message);
+		//		messageBoxWindow.ShowDialog();
+		//	}
+		//}
 
-		public bool CanExecuteEditPasswordCommand(object parameter)
-		{
-			return !String.IsNullOrWhiteSpace(Password) || !String.IsNullOrWhiteSpace(Logint);
-		}
+		//public bool CanExecuteEditPasswordCommand(object parameter)
+		//{
+		//	return !String.IsNullOrWhiteSpace(Password) || !String.IsNullOrWhiteSpace(Logint);
+		//}
 
 		#endregion
 

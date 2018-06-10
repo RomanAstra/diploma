@@ -51,8 +51,8 @@ namespace Diploma.ViewModel
 					Password = passwordBox.Password;
 				}
 
-				if (VariablesClass.Admins.ContainsKey(Login)
-					&& VariablesClass.Admins[Login] == Password)
+				if (VariablesClass.Admins.ContainsKey(Login.ToLower())
+					&& VariablesClass.Admins[Login.ToLower()] == Password)
 				{
 					MainWindowViewModel.Instance.SetLogInResult(true);
 				}

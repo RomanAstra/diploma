@@ -78,11 +78,18 @@
                 </TabItem>
                 <TabItem Header="Редактирование учетной записи администратора">
                     <StackPanel>
-                        <Label Content="Логин" Foreground="#FF00D1FF" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        <TextBox Text="{Binding Logint, UpdateSourceTrigger=PropertyChanged}" Margin="15,5,15,15"/>
                         <Label Content="Пароль" Foreground="#FF00D1FF" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        <TextBox Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}" Margin="15,5,15,15"/>
-                        <Button Content="Ok" Command="{Binding EditPassword}" Height="60" Margin="287,5,320,5"/>
+
+                        <WrapPanel>
+                            <Grid>
+                            <PasswordBox Name="MainPasswordBox" Width="667"/>
+                                <TextBox Name="MainTextBox" Width="667"/>
+                            </Grid>
+                            <Image Name="MainImage" Source="/Resources/anvis.png" Height="30" MouseLeftButtonDown="MainImage_MouseLeftButtonDown" MouseLeftButtonUp="MainImage_MouseLeftButtonUp"></Image>
+                           
+                        </WrapPanel>
+
+                        <Button Click="ButtonBase_OnClick" Content="Ok" Height="60" Margin="287,5,320,5"/>
                     </StackPanel>
                 </TabItem>
             </TabControl>
