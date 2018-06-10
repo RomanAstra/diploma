@@ -11,7 +11,7 @@ namespace Diploma.View
         public MessageBoxWindow(string message)
         {
             InitializeComponent();
-	        MainTextBox.Content = message;
+	        MainTextBox.Text = message;
 			MainButton.Click += delegate{ Close();};
         }
     }

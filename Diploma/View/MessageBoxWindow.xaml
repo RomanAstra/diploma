@@ -8,7 +8,7 @@
         Height="450" Width="800" WindowStartupLocation="Manual"
         Background="#333" ResizeMode="CanResizeWithGrip" WindowStyle="ToolWindow" MinWidth="800" MaxWidth="800" MinHeight="450" MaxHeight="450">
     <Grid>
-        <Label Name="MainTextBox" Height="Auto" Margin="0,0,0,116" FontSize="20"></Label>
+        <TextBox IsReadOnly="True" TextWrapping="WrapWithOverflow" Name="MainTextBox" Height="Auto" Margin="0,0,0,116" FontSize="20"></TextBox>
         <Button Name="MainButton" Content="Ok" Margin="0,326,0,0" FontSize="22"></Button>
     </Grid>
 </Window>

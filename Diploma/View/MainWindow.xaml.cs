@@ -1,9 +1,11 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Documents;
 using Diploma.Export;
 using Diploma.ViewModel;
 using System.Net;
 using System.IO;
+using Diploma.View;
 
 namespace Diploma
 {
@@ -23,79 +25,79 @@ namespace Diploma
 			MainRichTextBox.Document.Blocks.Clear();
 			var calculationResult = MainWindowViewModel.Instance.Calculation.CalculationResult;
 
-			var value = $@"Полученный расход воды по Указаниям: {calculationResult.WaterFlowAccordingDirections}";
+			var value = $@"Полученный расход воды по Указаниям: {calculationResult.WaterFlowAccordingDirections: .##} л.";
 			AddParagraph(value);
 
-			value = $@"Расход воды с учетом ОК: {calculationResult.WaterConsumptionIncludingOK}";
+			value = $@"Расход воды с учетом ОК: {calculationResult.WaterConsumptionIncludingOK: .##} л.";
 			AddParagraph(value);
 
-			value = $@"Расход воды с учетом Воздухосодержания: {calculationResult.WaterFlowWithRegardToAirContent}";
+			value = $@"Расход воды с учетом Воздухосодержания: {calculationResult.WaterFlowWithRegardToAirContent: .##} л.";
 			AddParagraph(value);
 
-			value = $@"Расход воды с учетом влажности песка: {calculationResult.WaterConsumptionWithRegardToHumidityOfSand}";
+			value = $@"Расход воды с учетом влажности песка: {calculationResult.WaterConsumptionWithRegardToHumidityOfSand: .##} л.";
 			AddParagraph(value);
 
-			value = $@"Количество цемента по расчету: {calculationResult.QuantityOfCementByCalculation}";
+			value = $@"Количество цемента по расчету: {calculationResult.QuantityOfCementByCalculation: .##} кг.";
 			AddParagraph(value);
 
-			value = $@"Полученное В/Ц из расчета: {calculationResult.WCByCalculation}";
+			value = $@"Полученное В/Ц из расчета: {calculationResult.WCByCalculation: .##}";
 			AddParagraph(value);
 
-			value = $@"Максимально допустимое В/Ц по Указаниям: {calculationResult.MaximumPermissibleAccordingWCToInstructions}";
+			value = $@"Максимально допустимое В/Ц по Указаниям: {calculationResult.MaximumPermissibleAccordingWCToInstructions: .##}";
 			AddParagraph(value);
 
-			value = $@"В/Ц принимается минимальное из полученного и допустимого: {calculationResult.MinimumOfTheReceivedAndAdmissible}";
+			value = $@"В/Ц принимается минимальное из полученного и допустимого: {calculationResult.MinimumOfTheReceivedAndAdmissible: .##}";
 			AddParagraph(value);
 
-			value = $@"Откорректированный расход цемента: {calculationResult.CorrectedCementConsumption}";
+			value = $@"Откорректированный расход цемента: {calculationResult.CorrectedCementConsumption: .##} кг.";
 			AddParagraph(value);
 
-			value = $@"Объем заполнителей: {calculationResult.VolumeOfAggregates}";
+			value = $@"Объем заполнителей: {calculationResult.VolumeOfAggregates: .##} кг.";
 			AddParagraph(value);
 
-			value = $@"Доля песка от общего кол-ва заполнит: {calculationResult.TheShareOfSandFromTheTotalNumberWillFill} %";
+			value = $@"Доля песка от общего кол-ва заполнит: {calculationResult.TheShareOfSandFromTheTotalNumberWillFill: .##} %";
 			AddParagraph(value);
 
-			value = $@"Доля песка откорректированная  по Мк и В/Ц: {calculationResult.TheProportionOfSandCorrectedByMk} %";
+			value = $@"Доля песка откорректированная  по Мк и В/Ц: {calculationResult.TheProportionOfSandCorrectedByMk: .##} %";
 			AddParagraph(value);
 
-			value = $@"Доля песка откорректированная по крупному заполнителю: {calculationResult.ShareOfSandCorrectedForGravel} %";
+			value = $@"Доля песка откорректированная по крупному заполнителю: {calculationResult.ShareOfSandCorrectedForGravel: .##} %";
 			AddParagraph(value);
 
-			value = $@"Количество песка(сухого): {calculationResult.TheAmountOfSandDry}";
+			value = $@"Количество песка(сухого): {calculationResult.TheAmountOfSandDry: .##} кг.";
 			AddParagraph(value);
 
-			value = $@"Количество песка(влажного): {calculationResult.TheAmountOfSandWet}";
+			value = $@"Количество песка(влажного): {calculationResult.TheAmountOfSandWet: .##} кг.";
 			AddParagraph(value);
 
-			value = $@"Количество крупного заполнителя: {calculationResult.NumberOfCoarseAggregate}";
+			value = $@"Количество крупного заполнителя: {calculationResult.NumberOfCoarseAggregate: .##} кг.";
 			AddParagraph(value);
 
-			value = $@"Химическая добавка: {calculationResult.ChemicalAdditive} кг.";
+			value = $@"Химическая добавка: {calculationResult.ChemicalAdditive: .##} кг.";
 			AddParagraph(value);
 
-			value = $@"В пересчете на 20% раствор: {calculationResult.InTermsOfSolution} л.";
+			value = $@"В пересчете на 20% раствор: {calculationResult.InTermsOfSolution: .##} л.";
 			AddParagraph(value);
 
 			value = $@"++++++++++++++++++++++++++++++++++++++++++++++++++++";
 			AddParagraph(value);
 
-			value = $@"Расчетный состав для {MainWindowViewModel.Instance.Calculation.CountConcrete}";
+			value = $@"Расчетный состав для {MainWindowViewModel.Instance.Calculation.CountConcrete: .##} м³";
 			AddParagraph(value);
 
-			value = $@"Цемент = {calculationResult.CorrectedCementConsumption * MainWindowViewModel.Instance.Calculation.CountConcrete}";
+			value = $@"Цемент = {calculationResult.CorrectedCementConsumption * MainWindowViewModel.Instance.Calculation.CountConcrete: .##} кг.";
 			AddParagraph(value);
 
-			value = $@"Вода = {calculationResult.WaterFlowWithRegardToAirContent * MainWindowViewModel.Instance.Calculation.CountConcrete}";
+			value = $@"Вода = {calculationResult.WaterFlowWithRegardToAirContent * MainWindowViewModel.Instance.Calculation.CountConcrete: .##} л.";
 			AddParagraph(value);
 
-			value = $@"Песок = {calculationResult.TheAmountOfSandDry * MainWindowViewModel.Instance.Calculation.CountConcrete}";
+			value = $@"Песок = {calculationResult.TheAmountOfSandDry * MainWindowViewModel.Instance.Calculation.CountConcrete: .##} кг.";
 			AddParagraph(value);
 
-			value = $@"Крупный заполнитель = {calculationResult.NumberOfCoarseAggregate * MainWindowViewModel.Instance.Calculation.CountConcrete}";
+			value = $@"Крупный заполнитель = {calculationResult.NumberOfCoarseAggregate * MainWindowViewModel.Instance.Calculation.CountConcrete: .##}  кг.";
 			AddParagraph(value);
 
-			value = $@"Химическая добавка { MainWindowViewModel.Instance.Calculation.Admixtures.Name} {MainWindowViewModel.Instance.Calculation.Admixtures.Value} % от массы цемента = {calculationResult.ChemicalAdditive * MainWindowViewModel.Instance.Calculation.CountConcrete}";
+			value = $@"Химическая добавка { MainWindowViewModel.Instance.Calculation.Admixtures.Name} {MainWindowViewModel.Instance.Calculation.Admixtures.Value} % от массы цемента = {calculationResult.ChemicalAdditive * MainWindowViewModel.Instance.Calculation.CountConcrete: .##} кг.";
 			AddParagraph(value);
 		}
 
@@ -108,8 +110,20 @@ namespace Diploma
 
 		private void ButtonExport_OnClick(object sender, RoutedEventArgs e)
 		{
-			var export = new WordExport();
-			export.Export(MainWindowViewModel.Instance.Calculation.CalculationResult);
+			try
+			{
+				var fileName = $"Рассчет от {DateTime.Now:U}.doc".Replace(':', '.');
+				var export = new WordExport(fileName);
+				export.Export(MainWindowViewModel.Instance.Calculation.CalculationResult);
+
+				var mess = new MessageBoxWindow($"Расчет ({fileName}) сформирован на рабочем столе");
+				mess.ShowDialog();
+			}
+			catch (Exception exception)
+			{
+				var mess = new MessageBoxWindow(exception.Message);
+				mess.ShowDialog();
+			}
 		}
 
         private void SendCalculationsButton_Click(object sender, RoutedEventArgs e)
