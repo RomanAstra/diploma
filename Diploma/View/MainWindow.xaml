@@ -96,15 +96,30 @@
                     </Grid>
                 </TabItem>
                 <TabItem IsEnabled="{Binding IsActiveCalculation}" Header="Вывод расчета">
-                    <StackPanel>
+                    <Grid DataContext="{StaticResource ViewModel}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="149*"/>
+                            <ColumnDefinition Width="118*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Grid.Row="0">
                         <RichTextBox Height="350" Name="MainRichTextBox" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
                             <FlowDocument >
 
                             </FlowDocument>
                         </RichTextBox>
                         <Button Click="ButtonExport_OnClick" Command="{Binding Export}" Content="Сформировать документ" Height="30" Margin="5"></Button>
-                        <Button Content="Отправить результаты расчета" Height="30" Margin="5" Click="SendCalculationsButton_Click"></Button>
-                    </StackPanel>
+                     </StackPanel>
+                        <StackPanel Grid.Column="1" Grid.Row="0">
+                            <ComboBox VerticalAlignment="Top" SelectedIndex="0">
+                                <TextBlock>LG Nexus 5X</TextBlock>
+                                <TextBlock>Huawai Nexus 6P</TextBlock>
+                                <TextBlock>iPhone 6S</TextBlock>
+                                <TextBlock>iPhone 6S Plus</TextBlock>
+                                <TextBlock>Microsoft Lumia 950</TextBlock>
+                            </ComboBox>
+                            <Button Content="Отправить результаты расчета" Height="30" Margin="5" Click="SendCalculationsButton_Click"></Button>
+                        </StackPanel>
+                    </Grid>
                 </TabItem>
                 <TabItem Header="Дополнительный материал">
                     <!--<StackPanel Orientation="Vertical">
