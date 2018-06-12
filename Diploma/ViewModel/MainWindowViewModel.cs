@@ -14,6 +14,7 @@ namespace Diploma.ViewModel
 		public static MainWindowViewModel Instance { get; private set; }
 		private string _nameCalculate;
 		public event EventHandler CalculationEvent;
+		public event EventHandler UpdateComboBoxEvent;
 		private bool _isActiveCalculation;
 		public bool IsActiveCalculation
 		{
@@ -210,12 +211,14 @@ namespace Diploma.ViewModel
 				{
 					Admixtures = ConcreteFormula?.AdmixturesList[0],
 					BrandConcrete = ConcreteFormula?.BrandConcreteList[0],
+					BrandConcreteFrostResistance = ConcreteFormula?.BrandConcreteFrostResistancesList[0],
 					CementBrand = ConcreteFormula?.CementBrandList[0],
 					CoarseAggregate = ConcreteFormula?.CoarseAggregateList[0],
 					FineAggregate = ConcreteFormula?.FineAggregateList[0],
+					HardeningConditions = ConcreteFormula?.HardeningConditionsesList[0],
 					MixtureMobility = ConcreteFormula?.MixtureMobilityList[0]
 				};
-				//IsShowCalculation = false;
+				IsActiveCalculation = false;
 			}
 			catch (Exception e)
 			{
@@ -239,7 +242,6 @@ namespace Diploma.ViewModel
 			{
 				OpenCalculationsWindow openCalculationsWindow = new OpenCalculationsWindow();
 				openCalculationsWindow.ShowDialog();
-				CementBrand = Calculation.CementBrand;
 			}
 			catch (Exception e)
 			{
@@ -389,6 +391,7 @@ namespace Diploma.ViewModel
 		public void SetCalculation(Calculation calculation)
 		{
 			Calculation = calculation;
+			UpdateComboBoxEvent?.Invoke(this, EventArgs.Empty);
 			//MessageBox.Show(CementBrand.Name);
 		}
 

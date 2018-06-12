@@ -6,6 +6,9 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:local="clr-namespace:Diploma"
         xmlns:viewModel="clr-namespace:Diploma.ViewModel"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:chartingToolkit="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+
         mc:Ignorable="d"
         Title="Главное окно" Height="554.172" Width="809.254"
         Background="#333"  ResizeMode="CanResizeWithGrip" WindowState="Maximized" FontFamily="Times New Roman">
@@ -56,39 +59,38 @@
 :" Foreground="White" Height="28"  Margin="5"></Label>
                         </StackPanel>
                         <StackPanel Grid.Column="1" Grid.Row="0">
-                            <TextBox Text="{Binding CountConcrete, UpdateSourceTrigger=PropertyChanged}" 
+                            <TextBox Name="CountConcreteTextBox" Text="{Binding CountConcrete, UpdateSourceTrigger=PropertyChanged}" 
                                      
                                      Margin="5" Height="28" Width="180"></TextBox>
-                            <ComboBox ItemsSource="{Binding ConcreteFormula.BrandConcreteList}"
+                            <ComboBox Name="BrandConcreteComboBox" ItemsSource="{Binding ConcreteFormula.BrandConcreteList}"
                                       DisplayMemberPath="Name"
                                       SelectedValue="{Binding Path=BrandConcrete}"
                                       Margin="5" Width="180"/>
-                            <ComboBox ItemsSource="{Binding ConcreteFormula.BrandConcreteFrostResistancesList}"
+                            <ComboBox Name="BrandConcreteFrostResistanceComboBox" ItemsSource="{Binding ConcreteFormula.BrandConcreteFrostResistancesList}"
                                       DisplayMemberPath="Name"
                                       SelectedValue="{Binding Path=BrandConcreteFrostResistance}"
                                       Margin="5" Width="180"/>
-                            <ComboBox ItemsSource="{Binding ConcreteFormula.HardeningConditionsesList}"
+                            <ComboBox Name="HardeningConditionsComboBox" ItemsSource="{Binding ConcreteFormula.HardeningConditionsesList}"
                                       DisplayMemberPath="Name"
                                       SelectedValue="{Binding Path=HardeningConditions}"
                                       Margin="5" Width="180"/>
-                            <ComboBox ItemsSource="{Binding ConcreteFormula.CoarseAggregateList, UpdateSourceTrigger=PropertyChanged}"
+                            <ComboBox Name="CoarseAggregateComboBox" ItemsSource="{Binding ConcreteFormula.CoarseAggregateList, UpdateSourceTrigger=PropertyChanged}"
                                   DisplayMemberPath="Name"
                                   SelectedValue="{Binding Path=CoarseAggregate}"
                                   Margin="5" Width="180"/>
-                            <ComboBox ItemsSource="{Binding ConcreteFormula.FineAggregateList, UpdateSourceTrigger=PropertyChanged}"
+                            <ComboBox Name="FineAggregateComboBox" ItemsSource="{Binding ConcreteFormula.FineAggregateList, UpdateSourceTrigger=PropertyChanged}"
                                   DisplayMemberPath="Name"
                                       SelectedValue="{Binding Path=FineAggregate}" 
                                   Margin="5" Width="180"/>
-                            <ComboBox ItemsSource="{Binding ConcreteFormula.CementBrandList, UpdateSourceTrigger=PropertyChanged}"
+                            <ComboBox Name="CementBrandComboBox" ItemsSource="{Binding ConcreteFormula.CementBrandList, UpdateSourceTrigger=PropertyChanged}"
                                   DisplayMemberPath="Name"
                                   SelectedValue="{Binding Path=CementBrand}" 
-
                                   Margin="5" Width="180"/>
-                            <ComboBox ItemsSource="{Binding ConcreteFormula.MixtureMobilityList, UpdateSourceTrigger=PropertyChanged}"
+                            <ComboBox Name="MixtureMobilityComboBox" ItemsSource="{Binding ConcreteFormula.MixtureMobilityList, UpdateSourceTrigger=PropertyChanged}"
                                   DisplayMemberPath="Name"
                                   SelectedValue="{Binding Path=MixtureMobility}"
                                   Margin="5" Width="180"/>
-                            <ComboBox ItemsSource="{Binding ConcreteFormula.AdmixturesList, UpdateSourceTrigger=PropertyChanged}"
+                            <ComboBox Name="AdmixturesComboBox" ItemsSource="{Binding ConcreteFormula.AdmixturesList, UpdateSourceTrigger=PropertyChanged}"
                                   DisplayMemberPath="Name"
                                       SelectedValue="{Binding Path=Admixtures}"
                                   Margin="5" Width="180"/>
@@ -113,15 +115,31 @@
                             <ComboBox VerticalAlignment="Top" SelectedIndex="0">
                                 <TextBlock>LG Nexus 5X</TextBlock>
                                 <TextBlock>Huawai Nexus 6P</TextBlock>
-                                <TextBlock>iPhone 6S</TextBlock>
-                                <TextBlock>iPhone 6S Plus</TextBlock>
-                                <TextBlock>Microsoft Lumia 950</TextBlock>
                             </ComboBox>
                             <Button Content="Отправить результаты расчета" Height="30" Margin="5" Click="SendCalculationsButton_Click"></Button>
                         </StackPanel>
                     </Grid>
                 </TabItem>
-                <TabItem Header="Дополнительный материал">
+                <TabItem Header="График твердение бетона">
+                    <StackPanel>
+                        <chartingToolkit:Chart Name="lineChart" Title="Изменение прочности бетона во времени" Background="DarkGray" 
+                                               Foreground="DarkBlue" VerticalAlignment="Top" Margin="16,36,20,0" Height="379"  IsEnabled="True">
+                            <chartingToolkit:LineSeries Title="Прочность"  
+                                                        ItemsSource="{Binding}" 
+                                                        DependentValueBinding="{Binding Path=Value}" 
+                                                        IndependentValueBinding="{Binding Path=Key}"
+                                                        IsSelectionEnabled="True">
+                                <chartingToolkit:LineSeries.IndependentAxis>
+                                    <chartingToolkit:LinearAxis Orientation="X" Title="n, сутки" Interval="5"  />
+                                </chartingToolkit:LineSeries.IndependentAxis>
+                                <chartingToolkit:LineSeries.DependentRangeAxis>
+                                    <chartingToolkit:LinearAxis Orientation="Y" Title="Rn/R28" />
+                                </chartingToolkit:LineSeries.DependentRangeAxis>
+                            </chartingToolkit:LineSeries>
+                        </chartingToolkit:Chart>
+                    </StackPanel>
+                </TabItem>
+                    <TabItem Header="Карта подбора">
                     <!--<StackPanel Orientation="Vertical">
                         -->
                     <!--<FlowDocumentPageViewer Height="315" Margin="0,0,0,0" Width="754">

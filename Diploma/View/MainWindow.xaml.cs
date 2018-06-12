@@ -1,10 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Documents;
 using Diploma.Export;
 using Diploma.ViewModel;
 using System.Net;
 using System.IO;
+using System.Windows.Media;
+using System.Windows.Threading;
+using Diploma.Data;
 using Diploma.View;
 
 namespace Diploma
@@ -18,6 +23,20 @@ namespace Diploma
 		{
 			InitializeComponent();
 			MainWindowViewModel.Instance.CalculationEvent += Calc;
+			MainWindowViewModel.Instance.UpdateComboBoxEvent += UpdateComboBox;
+
+			showColumnChart();
+			
+		}
+		ObservableCollection<KeyValuePair<double, double>> Power = new ObservableCollection<KeyValuePair<double, double>>();
+		
+		private void showColumnChart()
+		{
+			lineChart.DataContext = Power;
+			Power.Add(new KeyValuePair<double, double>(3, 45));
+			Power.Add(new KeyValuePair<double, double>(2, 100));
+			Power.Add(new KeyValuePair<double, double>(1, 30));
+			Power.Add(new KeyValuePair<double, double>(4, 3));
 		}
 
 		private void Calc(object sender, System.EventArgs eventArgs)
@@ -174,5 +193,72 @@ namespace Diploma
                 result = streamReader.ReadToEnd();
             }
         }
-    }
+
+		private void UpdateComboBox(object sender, EventArgs e)
+		{
+			CountConcreteTextBox.Text = MainWindowViewModel.Instance.CountConcrete.ToString();
+			for (var index = 0; index < MainWindowViewModel.Instance.ConcreteFormula.BrandConcreteList.Count; index++)
+			{
+				var value = MainWindowViewModel.Instance.ConcreteFormula.BrandConcreteList[index];
+				if (value.Name == MainWindowViewModel.Instance.BrandConcrete.Name)
+				{
+					BrandConcreteComboBox.SelectedIndex = index;
+				}
+			}
+
+			for (var index = 0; index < MainWindowViewModel.Instance.ConcreteFormula.BrandConcreteFrostResistancesList.Count; index++)
+			{
+				var value = MainWindowViewModel.Instance.ConcreteFormula.BrandConcreteFrostResistancesList[index];
+				if (value.Name == MainWindowViewModel.Instance.BrandConcreteFrostResistance.Name)
+				{
+					BrandConcreteFrostResistanceComboBox.SelectedIndex = index;
+				}
+			}
+
+			for (var index = 0; index < MainWindowViewModel.Instance.ConcreteFormula.HardeningConditionsesList.Count; index++)
+			{
+				var value = MainWindowViewModel.Instance.ConcreteFormula.HardeningConditionsesList[index];
+				if (value.Name == MainWindowViewModel.Instance.HardeningConditions.Name)
+				{
+					HardeningConditionsComboBox.SelectedIndex = index;
+				}
+			}
+
+			for (var index = 0; index < MainWindowViewModel.Instance.ConcreteFormula.FineAggregateList.Count; index++)
+			{
+				var value = MainWindowViewModel.Instance.ConcreteFormula.FineAggregateList[index];
+				if (value.Name == MainWindowViewModel.Instance.FineAggregate.Name)
+				{
+					FineAggregateComboBox.SelectedIndex = index;
+				}
+			}
+
+			for (var index = 0; index < MainWindowViewModel.Instance.ConcreteFormula.CementBrandList.Count; index++)
+			{
+				var value = MainWindowViewModel.Instance.ConcreteFormula.CementBrandList[index];
+				if (value.Name == MainWindowViewModel.Instance.CementBrand.Name)
+				{
+					CementBrandComboBox.SelectedIndex = index;
+				}
+			}
+
+			for (var index = 0; index < MainWindowViewModel.Instance.ConcreteFormula.MixtureMobilityList.Count; index++)
+			{
+				var value = MainWindowViewModel.Instance.ConcreteFormula.MixtureMobilityList[index];
+				if (value.Name == MainWindowViewModel.Instance.MixtureMobility.Name)
+				{
+					MixtureMobilityComboBox.SelectedIndex = index;
+				}
+			}
+
+			for (var index = 0; index < MainWindowViewModel.Instance.ConcreteFormula.AdmixturesList.Count; index++)
+			{
+				var value = MainWindowViewModel.Instance.ConcreteFormula.AdmixturesList[index];
+				if (value.Name == MainWindowViewModel.Instance.Admixtures.Name)
+				{
+					AdmixturesComboBox.SelectedIndex = index;
+				}
+			}
+		}
+	}
 }
