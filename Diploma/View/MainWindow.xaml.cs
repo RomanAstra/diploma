@@ -24,7 +24,7 @@ namespace Diploma
 			InitializeComponent();
 			MainWindowViewModel.Instance.CalculationEvent += Calc;
 			MainWindowViewModel.Instance.UpdateComboBoxEvent += UpdateComboBox;
-
+			pdfWebViewer.Navigate(new Uri(System.IO.Directory.GetCurrentDirectory() + @"/Resources/Map.pdf"));
 			showColumnChart();
 			
 		}
@@ -32,7 +32,7 @@ namespace Diploma
 		
 		private void showColumnChart()
 		{
-			lineChart.DataContext = Power;
+			//lineChart.DataContext = Power;
 			Power.Add(new KeyValuePair<double, double>(3, 45));
 			Power.Add(new KeyValuePair<double, double>(2, 100));
 			Power.Add(new KeyValuePair<double, double>(1, 30));

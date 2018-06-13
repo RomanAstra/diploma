@@ -120,52 +120,11 @@
                         </StackPanel>
                     </Grid>
                 </TabItem>
-                <TabItem Header="График твердение бетона">
-                    <StackPanel>
-                        <chartingToolkit:Chart Name="lineChart" Title="Изменение прочности бетона во времени" Background="DarkGray" 
-                                               Foreground="DarkBlue" VerticalAlignment="Top" Margin="16,36,20,0" Height="379"  IsEnabled="True">
-                            <chartingToolkit:LineSeries Title="Прочность"  
-                                                        ItemsSource="{Binding}" 
-                                                        DependentValueBinding="{Binding Path=Value}" 
-                                                        IndependentValueBinding="{Binding Path=Key}"
-                                                        IsSelectionEnabled="True">
-                                <chartingToolkit:LineSeries.IndependentAxis>
-                                    <chartingToolkit:LinearAxis Orientation="X" Title="n, сутки" Interval="5"  />
-                                </chartingToolkit:LineSeries.IndependentAxis>
-                                <chartingToolkit:LineSeries.DependentRangeAxis>
-                                    <chartingToolkit:LinearAxis Orientation="Y" Title="Rn/R28" />
-                                </chartingToolkit:LineSeries.DependentRangeAxis>
-                            </chartingToolkit:LineSeries>
-                        </chartingToolkit:Chart>
+
+                <TabItem Header="Карта подбора">
+                    <StackPanel Orientation="Vertical" Height="429" VerticalAlignment="Top">
+                        <WebBrowser x:Name="pdfWebViewer" Height="376"></WebBrowser>
                     </StackPanel>
-                </TabItem>
-                    <TabItem Header="Карта подбора">
-                    <!--<StackPanel Orientation="Vertical">
-                        -->
-                    <!--<FlowDocumentPageViewer Height="315" Margin="0,0,0,0" Width="754">
-                            <FlowDocument >
-                                <Paragraph>
-                                    An image in a block container
-                                </Paragraph>
-                                <BlockUIContainer>
-                                    <Image Source="{StaticResource step1image}" Margin="0,0,0,0" Height="215" Width="293" />
-                                </BlockUIContainer>
-                            </FlowDocument>
-                        </FlowDocumentPageViewer>-->
-                    <!--
-                        <Image Source="{StaticResource step1image}" Margin="0,0,0,0" Height="215" Width="293" />
-                        <Image Source="{StaticResource step1image}" Margin="0,0,0,0" Height="215" Width="293" />
-                    </StackPanel>-->
-                    <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" x:Name="panel">
-                        <StackPanel Orientation="Vertical" Height="312">
-                            <Image Source="{StaticResource step1image}" Margin="0,0,0,0" Height="215" Width="293" />
-                            <Image Source="{StaticResource step1image}" Margin="0,0,0,0" Height="215" Width="293" />
-                            <Image Source="{StaticResource step1image}" Margin="0,0,0,0" Height="215" Width="293" />
-                            <Rectangle Width="80" Height="80" Fill="black" Margin="4"/>
-                            <Rectangle Width="80" Height="80" Fill="yellow" Margin="4"/>
-                            <Rectangle Width="80" Height="80" Fill="Orange" Margin="4"/>
-                        </StackPanel>
-                    </ScrollViewer>
                 </TabItem>
             </TabControl>
         </StackPanel>
